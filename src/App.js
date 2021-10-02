@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Body from 'components/Body';
+import './App.scss';
+import './assets/styles/grid.scss';
+import Header from './components/Header';
+import { Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import Auth from 'features/Auth';
+import NotFound from 'components/NotFound';
+import HomeLayout from 'layouts/Home';
+import Aaaa from 'components/Body';
+export const history = createBrowserHistory();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <HomeLayout exact path="/" Component={Aaaa} />
+
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
