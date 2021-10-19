@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN } from 'constants /global';
+import { ACCESS_TOKEN } from 'constants/global';
 import axiosClient from './axiosClient';
 const token = localStorage.getItem(ACCESS_TOKEN);
 

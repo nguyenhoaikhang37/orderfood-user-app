@@ -1,11 +1,11 @@
 import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
-import Images from 'constants /images';
+import Images from 'constants/images';
 import { useSelector } from 'react-redux';
 import { selectAuthUser } from 'features/Auth/authSlice';
 import Avatar from '@mui/material/Avatar';
-import { ACCESS_TOKEN } from 'constants /global';
+import { ACCESS_TOKEN } from 'constants/global';
 
 const Header = () => {
   const user = useSelector(selectAuthUser);

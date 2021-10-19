@@ -1,6 +1,6 @@
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import { ACCESS_TOKEN } from 'constants /global';
+import { ACCESS_TOKEN } from 'constants/global';
 import React, { Fragment } from 'react';
 import { Redirect, Route } from 'react-router';
 

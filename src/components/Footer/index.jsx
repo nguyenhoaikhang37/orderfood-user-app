@@ -1,4 +1,4 @@
-import Images from 'constants /images';
+import Images from 'constants/images';
 import React from 'react';
 import './Footer.scss';
 

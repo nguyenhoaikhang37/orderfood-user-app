@@ -1,5 +1,5 @@
 import NotFound from 'components/NotFound';
-import { ACCESS_TOKEN } from 'constants /global';
+import { ACCESS_TOKEN } from 'constants/global';
 import Auth from 'features/Auth';
 import { getUserToken } from 'features/Auth/authSlice';
 import DetailStore from 'features/DetailStore';

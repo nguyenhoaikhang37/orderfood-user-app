@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailActions, selectTotalCart } from '../detailSlice';
-import Images from 'constants /images';
+import Images from 'constants/images';
 import FoodCartItem from './FoodCartItem';
 
 const Checkout = memo(function Checkout({ foodCart, onCheckout }) {

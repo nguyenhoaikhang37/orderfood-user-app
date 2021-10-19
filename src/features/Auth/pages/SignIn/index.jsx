@@ -4,7 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import SignInForm from 'features/Auth/components/SignInForm';
 import { Fragment } from 'react';
 import userApi from 'apis/userApi';
-import { ACCESS_TOKEN } from 'constants /global';
+import { ACCESS_TOKEN } from 'constants/global';
 import { useHistory } from 'react-router';
 
 const SignIn = ({ classes }) => {

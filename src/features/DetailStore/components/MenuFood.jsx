@@ -15,7 +15,7 @@ const MenuFood = memo(function MenuFood({ menu }) {
 
   return (
     <div>
-      {foodList.length !== 0 && (
+      {foodList?.length !== 0 && (
         <div id={menu._id} className="food-menu-text">
           {menu.name}
         </div>
