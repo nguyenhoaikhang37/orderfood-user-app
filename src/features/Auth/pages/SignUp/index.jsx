@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import SignUpForm from 'features/Auth/components/SignUpForm';
 import React, { Fragment } from 'react';
-import axios from 'axios';
+import userApi from 'apis/userApi';
 
 const SignUp = ({ classes }) => {
   const handleSubmitForm = async (formValues) => {
@@ -21,11 +21,7 @@ const SignUp = ({ classes }) => {
     };
 
     try {
-      await axios.post(
-        'https://nameless-mountain-24821.herokuapp.com/api/auth/register',
-        formatFormValues
-      );
-      console.log('Successfully sign up');
+     const res= await userApi.dangKy(formatFormValues)
     } catch (error) {
       console.log('Failed to sign up form submit', error);
     }

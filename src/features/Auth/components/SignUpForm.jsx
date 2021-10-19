@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { SelectField } from 'components/FormFields/SelectField';
 import axios from 'axios';
+import AddressInput from 'components/FormFields/AddressInput';
 
 const schema = yup.object().shape({
   phoneNumber: yup
@@ -24,9 +24,9 @@ const schema = yup.object().shape({
     .string()
     .required('Xác nhận mật khẩu không được để trống!')
     .oneOf([yup.ref('password'), null], 'Mật khẩu không trùng khớp!'),
-  district: yup.string().required('Vui lòng chọn quận, huyện!'),
-  ward: yup.string().required('Vui lòng chọn phường, xã!'),
-  street: yup.string().required('Tên đường không được để trống!'),
+  // district: yup.string().required('Vui lòng chọn quận, huyện!'),
+  // ward: yup.string().required('Vui lòng chọn phường, xã!'),
+  // street: yup.string().required('Tên đường không được để trống!'),
 });
 
 const SignUpForm = ({ classes, onSubmit }) => {
@@ -36,6 +36,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
   const [districtList, setDistrictList] = useState();
   const [ward, setWard] = useState();
   const [wardSelect, setWardSelect] = useState();
+  const [inputt, setInput] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -47,7 +48,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
       }
     })();
   }, []);
-
+  console.log(inputt);
   useEffect(() => {
     setWardSelect(
       districtList?.filter((district) => district.codename == ward).map((x) => x.wards)
@@ -70,7 +71,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
           control={control}
           label="Xác nhận mật khẩu"
         />
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             {districtList && (
               <SelectField
@@ -104,7 +105,9 @@ const SignUpForm = ({ classes, onSubmit }) => {
             )}
           </Grid>
         </Grid>
-        <InputField name="street" control={control} label="Đường" />
+        <InputField name="street" control={control} label="Đường" /> */}
+
+        <AddressInput />
 
         <Button
           type="submit"

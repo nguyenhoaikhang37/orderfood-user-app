@@ -1,9 +1,20 @@
 import React from 'react';
 import './Header.scss';
-import Images from 'constants/images';
 import { Link } from 'react-router-dom';
+import Images from 'constants /images';
+import { useSelector } from 'react-redux';
+import { selectAuthUser } from 'features/Auth/authSlice';
+import Avatar from '@mui/material/Avatar';
+import { ACCESS_TOKEN } from 'constants /global';
 
 const Header = () => {
+  const user = useSelector(selectAuthUser);
+
+  const handleSignOut = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    window.location.reload();
+  };
+
   return (
     <header className="header">
       <div className="grid wide">
@@ -41,16 +52,49 @@ const Header = () => {
                 Trợ Giúp
               </a>
             </li>
-            <li id="register-item" className="header__navbar-item header__navbar-item-separate">
-              <Link style={{ color: '#fff' }} to="auth/signup">
-                Đăng Ký
-              </Link>
-            </li>
-            <li id="login-item" className="header__navbar-item">
-              <Link style={{ color: '#fff' }} to="auth/signin">
-                Đăng Nhập
-              </Link>
-            </li>
+            {!user ? (
+              <>
+                <li id="register-item" className="header__navbar-item header__navbar-item-separate">
+                  <Link style={{ color: '#fff' }} to="auth/signup">
+                    Đăng Ký
+                  </Link>
+                </li>
+                <li id="login-item" className="header__navbar-item">
+                  <Link style={{ color: '#fff' }} to="auth/signin">
+                    Đăng Nhập
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <div className="header-cur">
+                <div className="header-avt">
+                  <Avatar sx={{ width: 30, height: 30 }}>
+                    {user?.profile?.fullName.slice(0, 1)}
+                  </Avatar>
+                  <p>{user?.profile?.fullName}</p>
+                </div>
+                <div className="header__cart-list">
+                  <ul className="signout-list">
+                    <li className="signout-item">
+                      <i class="fas fa-history signout-icon"></i>
+                      Lịch sử đơn hàng
+                    </li>
+                    <li className="signout-item">
+                      <i class="fas fa-ticket-alt signout-icon"></i>
+                      Ví voucher
+                    </li>
+                    <li className="signout-item">
+                      <i class="fas fa-user signout-icon"></i>
+                      Cập nhật tài khoàn
+                    </li>
+                    <li onClick={handleSignOut} className="signout-item">
+                      <i class="fas fa-sign-out-alt signout-icon"></i>
+                      Đăng xuất
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </ul>
         </nav>
         <input type="checkbox" hidden className="nav__input" id="nav-mobile-input" />
@@ -96,40 +140,6 @@ const Header = () => {
               <i className="header__cart-icon fas fa-shopping-cart" />
               <span className="header__cart-wrap-notice">1</span>
               {/* No cart: Header__cart-list--no-cart */}
-              <div className="header__cart-list">
-                <img src="Images/sellout.png" className="header__cart-no-card-img" />
-                <span className="header__cart-list-no-card-msg">Chưa có sản phẩm</span>
-                <div className="header__cart-heading">Sản phẩm đã thêm</div>
-                <ul className="header__cart-list-item">
-                  {/* Cart item */}
-                  <li title="Mũ chụp ngược Minecraft Dungeons" className="header__cart-item">
-                    <div className="header__cart-img-wrapper">
-                      <img
-                        src="https://cdn.shopify.com/s/files/1/0251/2155/4510/products/10961p_99c_1x_4245f004-582b-4a36-a07f-a8cf3468e0ca_800x.jpg?v=1610398977"
-                        className="header__cart-img"
-                      />
-                    </div>
-                    <div className="header__cart-item-info">
-                      <div className="header__cart-item-head">
-                        <div className="header__cart-item-name">
-                          Mũ chụp ngược Minecraft Dungeons
-                        </div>
-                        <div className="header__cart-item-price-wrap">
-                          <span className="header__cart-item-price">1.990.000đ</span>
-                          <span className="header__cart-item-multiply">x</span>
-                          <span className="header__cart-item-qnt">1</span>
-                        </div>
-                      </div>
-                      <div className="header__cart-item-body">
-                        <span className="header__cart-item-description">
-                          Phân loại: Hàng Quốc tế
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <button className="header__cart-view-cart btn btn--primary">Xem giỏ hàng</button>
-              </div>
             </div>
           </div>
         </div>

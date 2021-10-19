@@ -3,26 +3,19 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import SignInForm from 'features/Auth/components/SignInForm';
 import { Fragment } from 'react';
-import axios from 'axios';
+import userApi from 'apis/userApi';
+import { ACCESS_TOKEN } from 'constants /global';
+import { useHistory } from 'react-router';
 
 const SignIn = ({ classes }) => {
+  const history = useHistory();
+
   const handleSignInFormSubmit = async (formValues) => {
     try {
-      const res = await axios.post(
-        'https://server-express-foodapp.herokuapp.com/api/auth/login',
-        formValues
-      );
-      console.log('Successfully sign in', res.data);
-      // const res = await fetch('https://nameless-mountain-24821.herokuapp.com/api/auth/login', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     // 'Content-Type': 'application/x-www-form-urlencoded',
-      //   },
-      //   body: JSON.stringify(formValues),
-      // });
-
-      // console.log('success', res.json());
+      const res = await userApi.dangNhap(formValues);
+      localStorage.setItem(ACCESS_TOKEN, res.data.accessToken);
+      history.push('/');
+      window.location.reload();
     } catch (error) {
       console.log('Failed to sign in form submit', error);
     }

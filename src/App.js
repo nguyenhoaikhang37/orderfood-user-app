@@ -1,20 +1,36 @@
-import Body from 'components/Body';
+import NotFound from 'components/NotFound';
+import { ACCESS_TOKEN } from 'constants /global';
+import Auth from 'features/Auth';
+import { getUserToken } from 'features/Auth/authSlice';
+import DetailStore from 'features/DetailStore';
+import { detailActions } from 'features/DetailStore/detailSlice';
+import Store from 'features/Store';
+import { fetchCategoryList, fetchMenuList, fetchStoreList } from 'features/Store/storeSlice';
+import { createBrowserHistory } from 'history';
+import HomeLayout from 'layouts/Home';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Router, Switch } from 'react-router-dom';
 import './App.scss';
 import './assets/styles/grid.scss';
-import Header from './components/Header';
-import { Router, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import Auth from 'features/Auth';
-import NotFound from 'components/NotFound';
-import HomeLayout from 'layouts/Home';
-import Aaaa from 'components/Body';
 export const history = createBrowserHistory();
 
 function App() {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem(ACCESS_TOKEN);
+
+  useEffect(() => {
+    dispatch(fetchCategoryList());
+    dispatch(fetchMenuList());
+    dispatch(fetchStoreList());
+    dispatch(getUserToken(token));
+  }, []);
+
   return (
     <Router history={history}>
       <Switch>
-        <HomeLayout exact path="/" Component={Aaaa} />
+        <HomeLayout exact path="/" Component={Store} />
+        <HomeLayout exact path="/detail/:id" Component={DetailStore} />
 
         <Route path="/auth">
           <Auth />
