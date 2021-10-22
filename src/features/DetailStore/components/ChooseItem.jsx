@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { Checkbox, CircularProgress } from '@mui/material';
 import listChooseApi from 'apis/listChooseApi';
 
-const ChooseItem = memo(function ChooseItem({ chooseItem, handleAddChoose }) {
+const ChooseItem = memo(function ChooseItem({ checked, setChecked, chooseItem, isChoose }) {
   const [choose, setChoose] = useState([]);
-  const [checked, setChecked] = useState([]);
-  console.log(chooseItem);
+
   useEffect(() => {
     (async () => {
       const res = await listChooseApi.getListChooseById(chooseItem._id);
@@ -14,18 +13,24 @@ const ChooseItem = memo(function ChooseItem({ chooseItem, handleAddChoose }) {
     })();
   }, []);
 
-  useEffect(() => {
-    handleAddChoose(checked);
-  }, [checked]);
-
   const handleCheck = (item) => {
-    setChecked((prev) => {
-      const isChecked = checked.includes(item);
-      if (isChecked) {
-        return checked.filter((checkItem) => checkItem._id !== item._id);
-      }
-      return [...prev, item];
-    });
+    if (!isChoose) {
+      setChecked((prev) => {
+        const isChecked = checked.includes(item);
+        if (isChecked) {
+          return checked.filter((checkItem) => checkItem._id !== item._id);
+        }
+        return [...prev, item];
+      });
+    } else {
+      setChecked((prev) => {
+        const isChecked = checked.includes(item);
+        if (isChecked) {
+          return checked.filter((checkItem) => checkItem._id !== item._id);
+        }
+        return [item];
+      });
+    }
   };
   return (
     <Fragment>

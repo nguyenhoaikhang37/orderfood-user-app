@@ -1,7 +1,23 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectDetailFoodList } from '../detailSlice';
+import LoadingInfo from 'components/Loading/LoadingInfo';
 
-const StoreInfo = memo(function StoreInfo({ storeInfo }) {
+const StoreInfo = memo(function StoreInfo({ storeInfo, loading }) {
+  const foodList = useSelector(selectDetailFoodList);
+  const cloneFoodList = [...foodList];
+  const smallestMoney = cloneFoodList?.sort((a, b) => a.price - b.price)[0]?.price;
+  const biggestMoney = cloneFoodList?.sort((a, b) => b.price - a.price)[0]?.price;
+
+  if (loading) {
+    return (
+      <div className="block max-w-6xl mx-auto mb-0">
+        <LoadingInfo />
+      </div>
+    );
+  }
+
   return (
     <div style={{ background: '#fff' }}>
       <div className="block max-w-sm py-8 gap-3 mx-auto sm:max-w-6xl group  lg:grid lg:grid-cols-12 bg-coolGray-50">
@@ -30,9 +46,12 @@ const StoreInfo = memo(function StoreInfo({ storeInfo }) {
               <i className="far fa-clock text-gray-500"></i> {storeInfo?.open} - {storeInfo?.close}
             </p>
           </div>
-          <p className="text-gray-400 font-light">
-            <i className="far fa-money-bill-alt"></i> 6000 - 50000
-          </p>
+          {smallestMoney && biggestMoney && (
+            <p className="text-gray-400 font-light">
+              <i className="far fa-money-bill-alt"></i> {smallestMoney?.toLocaleString()}đ -{' '}
+              {biggestMoney?.toLocaleString()}đ
+            </p>
+          )}
         </div>
       </div>
     </div>
@@ -41,6 +60,7 @@ const StoreInfo = memo(function StoreInfo({ storeInfo }) {
 
 StoreInfo.propTypes = {
   storeInfo: PropTypes.object,
+  loading: PropTypes.bool,
 };
 
 export default StoreInfo;

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import ChooseItem from './ChooseItem';
 
-const ChooseList = memo(function ListChoose({ chooseList, handleAddChoose }) {
+const ChooseList = memo(function ListChoose({ checked, setChecked, chooseList }) {
   return (
     <div className="popup-box">
       {chooseList.map((choose) => (
@@ -10,7 +10,12 @@ const ChooseList = memo(function ListChoose({ chooseList, handleAddChoose }) {
           <div className="popup-item">
             <h4 className="popup-item-title">{choose?.name}</h4>
             <div className="popup-checkbox-list">
-              <ChooseItem handleAddChoose={handleAddChoose} chooseItem={choose} />
+              <ChooseItem
+                isChoose={choose.choose}
+                chooseItem={choose}
+                checked={checked}
+                setChecked={setChecked}
+              />
             </div>
           </div>
         </div>

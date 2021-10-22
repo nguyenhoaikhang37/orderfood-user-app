@@ -76,19 +76,19 @@ const Header = () => {
                 <div className="header__cart-list">
                   <ul className="signout-list">
                     <li className="signout-item">
-                      <i class="fas fa-history signout-icon"></i>
+                      <i className="fas fa-history signout-icon"></i>
                       Lịch sử đơn hàng
                     </li>
                     <li className="signout-item">
-                      <i class="fas fa-ticket-alt signout-icon"></i>
+                      <i className="fas fa-ticket-alt signout-icon"></i>
                       Ví voucher
                     </li>
                     <li className="signout-item">
-                      <i class="fas fa-user signout-icon"></i>
+                      <i className="fas fa-user signout-icon"></i>
                       Cập nhật tài khoàn
                     </li>
                     <li onClick={handleSignOut} className="signout-item">
-                      <i class="fas fa-sign-out-alt signout-icon"></i>
+                      <i className="fas fa-sign-out-alt signout-icon"></i>
                       Đăng xuất
                     </li>
                   </ul>

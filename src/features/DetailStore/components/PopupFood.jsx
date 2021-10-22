@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../DetailStore.scss';
 import ChooseList from './ChooseList';
@@ -7,14 +7,14 @@ import { detailActions } from '../detailSlice';
 
 const PopupFood = memo(function PopupFood({ food, setOpen }) {
   const dispatch = useDispatch();
-  const [chooseList, setChooseList] = useState([]);
+  const [checked, setChecked] = useState([]);
 
-  const handleAddChoose = (chooses) => {
-    setChooseList((prev) => [...prev, ...chooses]);
-  };
+  const choosePrice = useMemo(() => {
+    return checked?.reduce((total, cur) => total + cur.price, 0) || 0;
+  }, [checked]);
 
   const handleSubmitPopup = () => {
-    const formatListChoose = [...new Set(chooseList)];
+    const formatListChoose = [...new Set(checked)];
     const formatFood = { ...food, listChoose: formatListChoose };
     dispatch(detailActions.addFoodToCart(formatFood));
     setOpen(false);
@@ -30,16 +30,27 @@ const PopupFood = memo(function PopupFood({ food, setOpen }) {
         <div>
           <h3 className="font-bold text-xl">{food.name}</h3>
           <p className="font-light text-gray-400 my-2">{food.description}</p>
-          <p>Giá: {food.price.toLocaleString()}đ</p>
+          <p>Giá: {food?.lastPrice?.toLocaleString()}đ</p>
         </div>
       </div>
       {/* Popup Food List Choose */}
-      <ChooseList handleAddChoose={handleAddChoose} chooseList={food.choose} />
+      <ChooseList chooseList={food.choose} checked={checked} setChecked={setChecked} />
       {/* Popup Food Footer */}
       <div className="popup-footer">
         <div></div>
         <button onClick={handleSubmitPopup} className="popup-btn">
-          OK + 28,000d
+          OK + {(food?.lastPrice + choosePrice).toLocaleString()}{' '}
+          <span
+            style={{
+              fontWeight: '400',
+              position: 'relative',
+              top: '-9px',
+              fontSize: '10px',
+              right: '0',
+            }}
+          >
+            đ
+          </span>
         </button>
       </div>
     </div>

@@ -8,6 +8,19 @@
   padding: 30px;
 }
 
+.side-detail-loading {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 5px;
+  width: 200px;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 20px;
+  text-align: center;
+}
+
 .side-detail {
   position: -webkit-sticky;
   position: sticky;
@@ -39,6 +52,17 @@
     color: #9ca3af;
     font-style: italic;
     font-size: 12px;
+  }
+  &-list-choose-cart {
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
 }
 
@@ -401,4 +425,10 @@
 }
 .popup-box::-webkit-scrollbar-track {
   border-radius: 5px;
+}
+
+.food-price-prev {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: #6d6f71;
 }

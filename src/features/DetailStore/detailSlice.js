@@ -24,13 +24,12 @@ const detailSlice = createSlice({
       const foundIndex = state.foodCart.findIndex((food) => food._id === action.payload._id);
       const priceInListChoose =
         action.payload?.listChoose?.reduce((total, cur) => total + cur.price, 0) || 0;
-
       if (foundIndex >= 0) {
         newFoodCart[foundIndex] = {
           ...newFoodCart[foundIndex],
           quantityInCart: state.foodCart[foundIndex]?.quantityInCart + 1,
           totalFood:
-            (action.payload.price + priceInListChoose) *
+            (action.payload.lastPrice + priceInListChoose) *
             (state.foodCart[foundIndex]?.quantityInCart + 1),
         };
         return { ...state, foodCart: newFoodCart };
@@ -38,7 +37,7 @@ const detailSlice = createSlice({
         newFoodCart.push({
           ...action.payload,
           quantityInCart: 1,
-          totalFood: action.payload.price + priceInListChoose,
+          totalFood: action.payload.lastPrice + priceInListChoose,
         });
         return { ...state, foodCart: newFoodCart };
       }
@@ -54,7 +53,7 @@ const detailSlice = createSlice({
           ...newFoodCart[foundIndex],
           quantityInCart: state.foodCart[foundIndex]?.quantityInCart - 1,
           totalFood:
-            (action.payload.price + priceInListChoose) *
+            (action.payload.lastPrice + priceInListChoose) *
             (state.foodCart[foundIndex]?.quantityInCart - 1),
         };
 

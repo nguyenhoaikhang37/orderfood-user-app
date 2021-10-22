@@ -1,6 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Scrollspy from 'react-scrollspy';
+import Loading from 'components/Loading/Loading';
 
 const SideDetail = memo(function SideDetail({ menuList }) {
   const [menuListSlow, setMenuListSlow] = useState([]);
@@ -9,7 +10,7 @@ const SideDetail = memo(function SideDetail({ menuList }) {
     const timeoutMenuList = () => {
       setMenuListSlow(menuList);
     };
-    setTimeout(timeoutMenuList, 1000);
+    setTimeout(timeoutMenuList, 5000);
 
     return () => {
       clearTimeout(timeoutMenuList);
@@ -18,21 +19,31 @@ const SideDetail = memo(function SideDetail({ menuList }) {
 
   return (
     <div className="side-detail">
-      <div className="detail-heading">
-        Thực đơn <i className="fas fa-hamburger"></i>
-      </div>
-      <ul className="detail-list">
-        <Scrollspy items={menuList.map((menu) => menu._id)} currentClassName="is-current">
-          {menuListSlow.map((menu) => (
-            <li key={menu._id} className="detail-item">
-              {/* the a co className active */}
-              <a href={`#${menu._id}`} className="detail-link">
-                {menu.name}
-              </a>
-            </li>
-          ))}
-        </Scrollspy>
-      </ul>
+      {menuListSlow.length === 0 ? (
+        <>
+          <Loading />
+          <Loading />
+          <Loading />
+        </>
+      ) : (
+        <>
+          <div className="detail-heading">
+            Thực đơn <i className="fas fa-hamburger"></i>
+          </div>
+          <ul className="detail-list">
+            <Scrollspy items={menuList.map((menu) => menu._id)} currentClassName="is-current">
+              {menuListSlow.map((menu) => (
+                <li key={menu._id} className="detail-item">
+                  {/* the a co className active */}
+                  <a href={`#${menu._id}`} className="detail-link">
+                    {menu.name}
+                  </a>
+                </li>
+              ))}
+            </Scrollspy>
+          </ul>
+        </>
+      )}
     </div>
   );
 });

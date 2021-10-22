@@ -1,4 +1,8 @@
-import { selectStoreList, selectStoreMenuList } from 'features/Store/storeSlice';
+import {
+  selectStoreList,
+  selectStoreLoading,
+  selectStoreMenuList,
+} from 'features/Store/storeSlice';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -7,19 +11,14 @@ import FeedDetail from './components/FeedDetail';
 import SideDetail from './components/SideDetail';
 import StoreInfo from './components/StoreInfo';
 import './DetailStore.scss';
-import {
-  fetchFoodByRes,
-  selectDetailFoodCart,
-  selectDetailFoodList,
-  selectDetailLoading,
-} from './detailSlice';
+import { fetchFoodByRes, selectDetailFoodCart, selectDetailLoading } from './detailSlice';
 import orderApi from 'apis/orderApi';
 
 const DetailStore = () => {
   const dispatch = useDispatch();
   const storeList = useSelector(selectStoreList);
+  const loadingStoreInfo = useSelector(selectStoreLoading);
   const menuList = useSelector(selectStoreMenuList);
-  const foodList = useSelector(selectDetailFoodList);
   const foodCart = useSelector(selectDetailFoodCart);
   const loadingFood = useSelector(selectDetailLoading);
 
@@ -45,9 +44,9 @@ const DetailStore = () => {
         ship: 10000,
         total: totalCart,
       };
-
+      console.log(checkoutCart);
       const res = await orderApi.checkout(checkoutCart);
-      console.log(res.data);
+      console.log('thanh cong thanh toan');
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
@@ -56,13 +55,13 @@ const DetailStore = () => {
   return (
     <Fragment>
       {/* Store Info */}
-      <StoreInfo storeInfo={storeById} />
+      <StoreInfo storeInfo={storeById} loading={loadingStoreInfo} />
       <div style={{ background: '#f2f2f2' }}>
         <div className="content max-w-sm mx-auto sm:max-w-6xl">
           {/* Side Detail */}
           <SideDetail menuList={menuById} />
           {/* Feed Detail */}
-          <FeedDetail loading={loadingFood} menuList={menuById} foodList={foodList} />
+          <FeedDetail loading={loadingFood} menuList={menuById} />
           {/* Checkout */}
           <Checkout onCheckout={handleCheckout} foodCart={foodCart} />
         </div>

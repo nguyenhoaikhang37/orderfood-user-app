@@ -2,12 +2,13 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { LinearProgress } from '@mui/material';
 import MenuFood from './MenuFood';
+import LoadingFood from 'components/Loading/LoadingFood';
 
 const FeedDetail = memo(function FeedDetail({ menuList, loading }) {
   return (
     <div className="main">
       {loading ? (
-        <LinearProgress />
+        <LoadingFood />
       ) : (
         <div className="food-box">
           {menuList.map((menu) => (

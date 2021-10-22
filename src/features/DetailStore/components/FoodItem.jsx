@@ -6,6 +6,7 @@ import Popup from 'components/Popup';
 import PopupFood from './PopupFood';
 
 const FoodItem = memo(function FoodItem({ food }) {
+  console.log('🚀 ~ file: FoodItem.jsx ~ line 9 ~ FoodItem ~ food', food);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -32,7 +33,53 @@ const FoodItem = memo(function FoodItem({ food }) {
           </div>
         </div>
         <div className="food-price-info">
-          <p className="food-price">{food?.price.toLocaleString()} đ</p>
+          {food?.lastPrice === food?.price ? (
+            <p className="food-price">
+              {food?.price?.toLocaleString()}{' '}
+              <span
+                style={{
+                  fontWeight: '400',
+                  position: 'relative',
+                  top: '-9px',
+                  fontSize: '10px',
+                  right: '0',
+                }}
+              >
+                đ
+              </span>
+            </p>
+          ) : (
+            <div className="flex flex-col">
+              <p className="food-price-prev">
+                {food?.price?.toLocaleString()}{' '}
+                <span
+                  style={{
+                    fontWeight: '400',
+                    position: 'relative',
+                    top: '-9px',
+                    fontSize: '10px',
+                    right: '0',
+                  }}
+                >
+                  đ
+                </span>
+              </p>
+              <p className="food-price">
+                {food?.lastPrice?.toLocaleString()}{' '}
+                <span
+                  style={{
+                    fontWeight: '400',
+                    position: 'relative',
+                    top: '-9px',
+                    fontSize: '10px',
+                    right: '0',
+                  }}
+                >
+                  đ
+                </span>
+              </p>
+            </div>
+          )}
           <button onClick={handleAddToCart} className="food-price-add">
             <i className="fas fa-plus-square food-price-icon"></i>
           </button>
