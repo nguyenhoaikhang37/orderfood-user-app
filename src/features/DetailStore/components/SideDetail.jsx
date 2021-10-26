@@ -10,19 +10,15 @@ const SideDetail = memo(function SideDetail({ menuList }) {
     const timeoutMenuList = () => {
       setMenuListSlow(menuList);
     };
-    setTimeout(timeoutMenuList, 5000);
+    setTimeout(timeoutMenuList, 15000);
 
-    return () => {
-      clearTimeout(timeoutMenuList);
-    };
-  }, [menuList, menuListSlow]);
+    return () => setTimeout(timeoutMenuList);
+  }, [menuList]);
 
   return (
     <div className="side-detail">
       {menuListSlow.length === 0 ? (
         <>
-          <Loading />
-          <Loading />
           <Loading />
         </>
       ) : (

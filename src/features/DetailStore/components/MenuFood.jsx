@@ -26,17 +26,23 @@ const MenuFood = memo(function MenuFood({ menu }) {
 
   return (
     <div>
+      {comboList?.length !== 0 && (
+        <div id={menu._id} className="food-menu-text">
+          {menu.name}
+        </div>
+      )}
       {foodList?.length !== 0 && (
         <div id={menu._id} className="food-menu-text">
           {menu.name}
         </div>
       )}
+
       <div className="food-list">
-        {foodList?.map((food) => (
-          <FoodItem key={food._id} food={food} />
-        ))}
         {comboList?.map((combo) => (
           <ComboItem key={combo._id} combo={combo} />
+        ))}
+        {foodList?.map((food) => (
+          <FoodItem key={food._id} food={food} />
         ))}
       </div>
     </div>

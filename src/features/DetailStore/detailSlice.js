@@ -90,9 +90,6 @@ export const detailActions = detailSlice.actions;
 export const selectDetailLoading = (state) => state.detail.loading;
 export const selectDetailFoodList = (state) => state.detail.foodList;
 export const selectDetailFoodCart = (state) => state.detail.foodCart;
-export const selectTotalCart = createSelector(selectDetailFoodCart, (foodCart) =>
-  foodCart?.reduce((total, cur) => total + cur.totalFood, 0)
-);
 //REDUCER
 const detailReducer = detailSlice.reducer;
 export default detailReducer;

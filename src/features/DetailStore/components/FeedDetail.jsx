@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { LinearProgress } from '@mui/material';
 import MenuFood from './MenuFood';
 import LoadingFood from 'components/Loading/LoadingFood';
 

@@ -15,7 +15,7 @@ const Store = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(detailActions.deleteAllFoodCart());
+    // dispatch(detailActions.deleteAllFoodCart());
   }, []);
 
   return (
