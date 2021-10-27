@@ -23,7 +23,82 @@ const FoodCartItem = memo(function FoodCartItem({ food, handleAddToCart, handleR
           <span>{food?.quantityInCart}</span>
           <i onClick={() => handleAddToCart(food)} className="fas fa-plus-circle checkout-icon"></i>
         </div>
-        <p className="checkout-price">{food?.totalFood.toLocaleString()} đ</p>
+        {food?.lastPrice === food?.price ? (
+            <p className="checkout-price">
+              {food?.totalFood?.toLocaleString()}{' '}
+              <span
+                style={{
+                  fontWeight: '400',
+                  position: 'relative',
+                  top: '-9px',
+                  fontSize: '10px',
+                  right: '0',
+                }}
+              >
+                đ
+              </span>
+            </p>
+          ) :  food?.price ? <div className="flex flex-col">
+          <p className="food-price-prev">
+            {food?.price?.toLocaleString()}{' '}
+            <span
+              style={{
+                fontWeight: '400',
+                position: 'relative',
+                top: '-9px',
+                fontSize: '10px',
+                right: '0',
+              }}
+            >
+              đ
+            </span>
+          </p>
+          <p className="checkout-price">
+            {food?.totalFood?.toLocaleString()}{' '}
+            <span
+              style={{
+                fontWeight: '400',
+                position: 'relative',
+                top: '-9px',
+                fontSize: '10px',
+                right: '0',
+              }}
+            >
+              đ
+            </span>
+          </p>
+        </div>:(
+            <div className="flex flex-col">
+              <p className="food-price-prev">
+                {food?.total?.toLocaleString()}{' '}
+                <span
+                  style={{
+                    fontWeight: '400',
+                    position: 'relative',
+                    top: '-9px',
+                    fontSize: '10px',
+                    right: '0',
+                  }}
+                >
+                  đ
+                </span>
+              </p>
+              <p className="checkout-price">
+                {food?.totalFood?.toLocaleString()}{' '}
+                <span
+                  style={{
+                    fontWeight: '400',
+                    position: 'relative',
+                    top: '-9px',
+                    fontSize: '10px',
+                    right: '0',
+                  }}
+                >
+                  đ
+                </span>
+              </p>
+            </div>
+          )}
       </div>
     </div>
   );

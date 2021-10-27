@@ -6,7 +6,6 @@ import Popup from 'components/Popup';
 import PopupFood from './PopupFood';
 
 const FoodItem = memo(function FoodItem({ food }) {
-  console.log('🚀 ~ file: FoodItem.jsx ~ line 9 ~ FoodItem ~ food', food);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

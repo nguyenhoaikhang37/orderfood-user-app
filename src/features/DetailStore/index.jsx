@@ -41,11 +41,16 @@ const DetailStore = () => {
   const handleCheckout = async ({ foodCart, totalCart }) => {
     try {
       const checkoutCart = {
-        foods: foodCart.map((cart) => ({
-          food: cart._id,
-          quantityInCart: cart.quantityInCart,
-          totalFood: cart.totalFood,
+        arrayFood: foodCart.filter(food => !food.comboDetails).map((cart) => ({
+          idFood: cart._id,
+          quantityFood: cart.quantityInCart,
+          amount: cart.totalFood,
           listChoose: cart.choose,
+        })),
+        arrayCombo: foodCart.filter(food => food.comboDetails).map((cart) => ({
+          idCombo: cart._id,
+          quantityCombo: cart.quantityInCart,
+          amount: cart.totalFood,
         })),
         restaurant: storeById._id,
         pay: '61614a21855f83b83e611b80',
@@ -53,8 +58,9 @@ const DetailStore = () => {
         total: totalCart,
       };
       console.log(checkoutCart);
-      const res = await orderApi.checkout(checkoutCart);
-      console.log('thanh cong thanh toan');
+      console.log("fc",foodCart);
+      // const res = await orderApi.checkout(checkoutCart);
+      // console.log('thanh cong thanh toan');
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }

@@ -15,6 +15,7 @@ const ChooseItem = memo(function ChooseItem({ checked, setChecked, chooseItem, i
 
   const handleCheck = (item) => {
     if (!isChoose) {
+      // checkbox
       setChecked((prev) => {
         const isChecked = checked.includes(item);
         if (isChecked) {
@@ -23,15 +24,19 @@ const ChooseItem = memo(function ChooseItem({ checked, setChecked, chooseItem, i
         return [...prev, item];
       });
     } else {
+      // radio
       setChecked((prev) => {
         const isChecked = checked.includes(item);
         if (isChecked) {
           return checked.filter((checkItem) => checkItem._id !== item._id);
         }
-        return [item];
+
+        return [...checked.filter((checkItem) => checkItem.choose !== item.choose), item];
       });
     }
   };
+  console.log(checked);
+
   return (
     <Fragment>
       {choose.length !== 0 ? (
