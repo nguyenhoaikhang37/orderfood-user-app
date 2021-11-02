@@ -19,7 +19,7 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
 
   const handleCheckoutClick = () => {
     onCheckout?.({
-      foodCart,
+      foodCart: foodCart?.filter((food) => food.restaurant === idParams.id),
       totalCart: foodCart
         ?.filter((food) => food.restaurant === idParams.id)
         ?.reduce((total, cur) => total + cur.totalFood, 0),
@@ -76,7 +76,9 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
           className="btn-checkout"
           onClick={handleCheckoutClick}
         >
-          <p className="btn-checkout-text">{loading && <CircularProgress size="1rem" color="inherit" />}Thanh toán</p>
+          <p className="btn-checkout-text">
+            {loading && <CircularProgress size="1rem" color="inherit" />}Thanh toán
+          </p>
           <p className="btn-checkout-price">
             {foodCart
               ?.filter((food) => food.restaurant === idParams.id)
