@@ -4,20 +4,20 @@ import Scrollspy from 'react-scrollspy';
 import Loading from 'components/Loading/Loading';
 
 const SideDetail = memo(function SideDetail({ menuList }) {
-  const [menuListSlow, setMenuListSlow] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    const timeoutMenuList = () => {
-      setMenuListSlow(menuList);
+    const timeoutRefresh = () => {
+      setRefresh(true);
     };
-    setTimeout(timeoutMenuList, 15000);
+    setTimeout(timeoutRefresh, 15000);
 
-    return () => setTimeout(timeoutMenuList);
-  }, [menuList]);
+    return () => setTimeout(timeoutRefresh);
+  }, []);
 
   return (
     <div className="side-detail">
-      {menuListSlow.length === 0 ? (
+      {menuList.length === 0 ? (
         <>
           <Loading />
         </>
@@ -28,7 +28,7 @@ const SideDetail = memo(function SideDetail({ menuList }) {
           </div>
           <ul className="detail-list">
             <Scrollspy items={menuList.map((menu) => menu._id)} currentClassName="is-current">
-              {menuListSlow.map((menu) => (
+              {menuList.map((menu) => (
                 <li key={menu._id} className="detail-item">
                   {/* the a co className active */}
                   <a href={`#${menu._id}`} className="detail-link">

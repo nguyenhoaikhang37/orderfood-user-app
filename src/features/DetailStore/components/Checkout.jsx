@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { detailActions } from '../detailSlice';
 import Images from 'constants/images';
 import FoodCartItem from './FoodCartItem';
+import { CircularProgress } from '@mui/material';
 
-const Checkout = memo(function Checkout({ foodCart, idParams, onCheckout }) {
+const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckout }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = (food) => {
@@ -75,7 +76,7 @@ const Checkout = memo(function Checkout({ foodCart, idParams, onCheckout }) {
           className="btn-checkout"
           onClick={handleCheckoutClick}
         >
-          <p className="btn-checkout-text">Thanh toán</p>
+          <p className="btn-checkout-text">{loading && <CircularProgress size="1rem" color="inherit" />}Thanh toán</p>
           <p className="btn-checkout-price">
             {foodCart
               ?.filter((food) => food.restaurant === idParams.id)

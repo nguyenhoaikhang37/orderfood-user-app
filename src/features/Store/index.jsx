@@ -1,22 +1,16 @@
 import { LinearProgress } from '@mui/material';
-import { detailActions } from 'features/DetailStore/detailSlice';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Filter from './components/Filter';
 import Sidebar from './components/Sidebar';
 import StoreList from './components/StoreList';
 import './Store.scss';
-import { selectStoreList, selectStoreLoading, selectStoreCategoryList } from './storeSlice';
+import { selectStoreCategoryList, selectStoreList, selectStoreLoading } from './storeSlice';
 
 const Store = () => {
   const loadingStore = useSelector(selectStoreLoading);
   const categoryList = useSelector(selectStoreCategoryList);
   const storeList = useSelector(selectStoreList);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // dispatch(detailActions.deleteAllFoodCart());
-  }, []);
 
   return (
     <div className="container">

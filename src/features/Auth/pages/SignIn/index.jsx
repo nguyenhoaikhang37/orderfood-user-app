@@ -11,10 +11,13 @@ import { Alert } from '@mui/material';
 const SignIn = ({ classes }) => {
   const history = useHistory();
   const [errorLogin, setErrorLogin] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSignInFormSubmit = async (formValues) => {
     try {
+      setLoading(true);
       const res = await userApi.dangNhap(formValues);
+      setLoading(false);
       localStorage.setItem(ACCESS_TOKEN, res.data.accessToken);
       history.push('/');
       window.location.reload();
@@ -32,7 +35,7 @@ const SignIn = ({ classes }) => {
       <Typography component="h1" variant="h5">
         Sign in
       </Typography>
-      <SignInForm classes={classes} onSubmit={handleSignInFormSubmit} />
+      <SignInForm classes={classes} loading={loading} onSubmit={handleSignInFormSubmit} />
       {errorLogin && <Alert severity="error">{errorLogin}</Alert>}
     </Fragment>
   );

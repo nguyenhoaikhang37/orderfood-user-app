@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectDetailFoodList } from '../detailSlice';
 import LoadingInfo from 'components/Loading/LoadingInfo';
+import ContentLoader from 'react-content-loader';
 
 const StoreInfo = memo(function StoreInfo({ storeInfo, loading }) {
   const foodList = useSelector(selectDetailFoodList);
@@ -46,11 +47,29 @@ const StoreInfo = memo(function StoreInfo({ storeInfo, loading }) {
               <i className="far fa-clock text-gray-500"></i> {storeInfo?.open} - {storeInfo?.close}
             </p>
           </div>
-          {smallestMoney && biggestMoney && (
+          {smallestMoney && biggestMoney ? (
             <p className="text-gray-400 font-light">
               <i className="far fa-money-bill-alt"></i> {smallestMoney?.toLocaleString()}đ -{' '}
               {biggestMoney?.toLocaleString()}đ
             </p>
+          ) : (
+            <ContentLoader
+              speed={2}
+              width={340}
+              height={84}
+              viewBox="0 0 340 84"
+              backgroundColor="#f3f3f3"
+              foregroundColor="#ecebeb"
+            >
+              <rect x="568" y="163" rx="3" ry="3" width="67" height="11" />
+              <rect x="5" y="15" rx="3" ry="3" width="140" height="15" />
+              <rect x="550" y="161" rx="3" ry="3" width="53" height="11" />
+              <rect x="528" y="155" rx="3" ry="3" width="72" height="11" />
+              <rect x="516" y="155" rx="3" ry="3" width="100" height="11" />
+              <rect x="581" y="154" rx="3" ry="3" width="37" height="11" />
+              <rect x="475" y="139" rx="3" ry="3" width="140" height="11" />
+              <rect x="461" y="152" rx="3" ry="3" width="173" height="11" />
+            </ContentLoader>
           )}
         </div>
       </div>

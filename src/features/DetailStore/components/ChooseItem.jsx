@@ -35,7 +35,6 @@ const ChooseItem = memo(function ChooseItem({ checked, setChecked, chooseItem, i
       });
     }
   };
-  console.log(checked);
 
   return (
     <Fragment>

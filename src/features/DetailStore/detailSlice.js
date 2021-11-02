@@ -65,12 +65,8 @@ const detailSlice = createSlice({
             };
       }
     },
-    deleteAllFoodCart(state) {
-      const newFoodCart = [...state.foodCart];
-
-      newFoodCart.length = 0;
-
-      return { ...state, foodCart: newFoodCart };
+    deleteFoodCartByRes(state, action) {
+      return { ...state, foodCart: state.foodCart.filter(cart => cart.restaurant != action.payload) };
     },
   },
   extraReducers: {

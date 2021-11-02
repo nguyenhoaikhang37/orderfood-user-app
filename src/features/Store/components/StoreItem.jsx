@@ -6,7 +6,9 @@ const StoreItem = memo(function StoreItem({ store }) {
   return (
     <div className="col l-2-4 m-4 c-6">
       <div className="home-product-item">
-        <img src={store.photo} className="home-product-item__img" />
+        <Link to={`/detail/${store._id}`}>
+          <img src={store.photo} className="home-product-item__img" />
+        </Link>
         <div className="home-product-item__name">
           <Link to={`/detail/${store._id}`}> {store.name}</Link>
         </div>

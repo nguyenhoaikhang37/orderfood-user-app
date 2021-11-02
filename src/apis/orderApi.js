@@ -11,7 +11,17 @@ const orderApi = {
       headers: {
         Authorization: 'Bearer ' + token,
       },
-      data: checkoutCart
+      data: checkoutCart,
+    });
+  },
+  getHistory() {
+    const url = `/order`;
+    return axiosClient({
+      url,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     });
   },
 };

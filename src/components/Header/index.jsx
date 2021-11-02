@@ -75,9 +75,11 @@ const Header = () => {
                 </div>
                 <div className="header__cart-list">
                   <ul className="signout-list">
-                    <li className="signout-item">
-                      <i className="fas fa-history signout-icon"></i>
-                      Lịch sử đơn hàng
+                    <li>
+                      <Link to="/order-history" className="signout-item">
+                        <i className="fas fa-history signout-icon"></i>
+                        Lịch sử đơn hàng
+                      </Link>
                     </li>
                     <li className="signout-item">
                       <i className="fas fa-ticket-alt signout-icon"></i>
@@ -102,9 +104,9 @@ const Header = () => {
         <label htmlFor="nav-mobile-input" className="nav__overlay" />
         {/* Header-with-search */}
         <div className="header-with-search">
-          <a className="header__logo-link">
+          <Link to="/" className="header__logo-link">
             <img src={Images.LOGO2} className="header__logo-img" />
-          </a>
+          </Link>
           <div className="header__search">
             <div className="header__search-input-wrap">
               <input

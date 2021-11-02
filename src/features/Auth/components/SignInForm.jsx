@@ -1,10 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { CircularProgress } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { InputField } from 'components/FormFields/InputField';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
@@ -21,7 +22,7 @@ const schema = yup.object().shape({
     .max(20, 'Mật khẩu chứa nhiều nhất 20 kí tự!'),
 });
 
-const SignInForm = ({ classes, onSubmit }) => {
+const SignInForm = ({ classes, loading, onSubmit }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -46,6 +47,7 @@ const SignInForm = ({ classes, onSubmit }) => {
           color="secondary"
           className={classes.submit}
         >
+          {loading && <CircularProgress size="1rem" color="inherit" />}
           Sign In
         </Button>
         <Grid container justifyContent="flex-end">
