@@ -20,31 +20,11 @@ const Header = () => {
       <div className="grid wide">
         <nav className="header__navbar hide-on-mobile-tablet">
           <ul className="header__navbar-list">
-            <li className="header__navbar-item header__navbar-item--has-notify">
+            <li className="header__navbar-item">
               <a className="header__navbar-item-link">
                 <i className="header__navbar-icon far fa-bell" />
                 Thông Báo
               </a>
-              <div className="header__notify">
-                <header className="header__notify-header">Thông báo mới nhận</header>
-                <ul className="header__notify-list">
-                  <li className="header__notify-item header__notify-item--viewed">
-                    <a className="header__notify-link">
-                      <img
-                        src="https://cdn.europosters.eu/image/750webp/84830.webp"
-                        className="header__notify-img"
-                      />
-                      <div className="header__notify-info">
-                        <span className="header__notify-name">Áo thun Minecraft chính hãng</span>
-                        <span className="header__notify-description">Mô tả sản phẩm</span>
-                      </div>
-                    </a>
-                  </li>
-                  <footer className="header__notify-footer">
-                    <a className="header__notify-footer-btn">Xem tất cả</a>
-                  </footer>
-                </ul>
-              </div>
             </li>
             <li className="header__navbar-item">
               <a className="header__navbar-item-link">
@@ -137,13 +117,7 @@ const Header = () => {
             <span className="header__search-fillter-text">Lọc</span>
           </button>
           {/* Cart layout */}
-          <div className="header__cart hide-on-mobile-tablet">
-            <div className="header__cart-wrap">
-              <i className="header__cart-icon fas fa-shopping-cart" />
-              <span className="header__cart-wrap-notice">1</span>
-              {/* No cart: Header__cart-list--no-cart */}
-            </div>
-          </div>
+          <div className="header__cart hide-on-mobile-tablet"></div>
         </div>
       </div>
     </header>

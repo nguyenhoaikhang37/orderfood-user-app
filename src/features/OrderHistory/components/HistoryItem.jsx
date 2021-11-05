@@ -41,12 +41,20 @@ const HistoryItem = ({ history, index }) => {
                 aria-hidden
                 className="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
               />
+              <span className="relative text-xs">Chờ xác nhận</span>
+            </span>
+          ) : history?.status === 1 ? (
+            <span className="relative inline-block px-3 py-1 font-semibold text-indigo-900 leading-tight">
+              <span
+                aria-hidden
+                className="absolute inset-0 bg-indigo-200 opacity-50 rounded-full"
+              />
               <span className="relative text-xs">Đang giao</span>
             </span>
           ) : (
             <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
               <span aria-hidden className="absolute inset-0 bg-green-200 opacity-50 rounded-full" />
-              <span className="relative text-xs">Đã giao</span>
+              <span className="relative text-xs">Đã nhận</span>
             </span>
           )}
         </td>

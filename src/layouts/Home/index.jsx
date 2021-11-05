@@ -1,3 +1,4 @@
+import ButtonCart from 'components/ButtonCart';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import { ACCESS_TOKEN } from 'constants/global';
@@ -20,6 +21,7 @@ const HomeLayout = ({ Component, ...restProps }) => {
             <Header />
             <Component {...routeProps} />
             <Footer />
+            <ButtonCart />
           </Fragment>
         );
       }}

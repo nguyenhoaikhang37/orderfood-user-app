@@ -1,0 +1,66 @@
+.header__notify-btn-item {
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  padding-top: 10px;
+}
+
+.header__notify-btn-item:hover {
+  cursor: pointer;
+  background: #fceded;
+}
+
+.header__notify-btn-item--viewed {
+  background-color: #f8f8f8;
+}
+
+.header__notify-btn-link {
+  display: flex;
+  gap: 0 20px;
+  padding: 0 12px 12px;
+  justify-content: space-between;
+}
+
+.header__notify-btn-img {
+  width: 48px;
+  border-radius: 10px;
+  object-fit: contain;
+  background-position: center;
+  overflow: hidden;
+}
+
+.header__notify-btn-info {
+  margin-left: 12px;
+}
+
+.header__notify-btn-name {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-color);
+  line-height: 1.3rem;
+  font-weight: bold;
+}
+
+.header__notify-btn-description {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.78rem;
+  color: #616161;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.children-info {
+  display: flex;
+}
+.header__notify-btn-go {
+  font-size: 11px;
+  color: #fd452b;
+}
+.header__notify-btn-go:hover {
+  opacity: 0.7;
+}

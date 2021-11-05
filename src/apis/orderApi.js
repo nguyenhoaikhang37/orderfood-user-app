@@ -14,8 +14,28 @@ const orderApi = {
       data: checkoutCart,
     });
   },
-  getHistory() {
-    const url = `/order`;
+  getHistoryCXN() {
+    const url = `/order/stt0`;
+    return axiosClient({
+      url,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+  },
+  getHistoryDG() {
+    const url = `/order/stt1`;
+    return axiosClient({
+      url,
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+  },
+  getHistoryHT() {
+    const url = `/order/stt2`;
     return axiosClient({
       url,
       method: 'GET',
