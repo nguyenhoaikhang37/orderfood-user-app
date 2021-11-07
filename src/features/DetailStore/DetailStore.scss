@@ -82,6 +82,7 @@
     padding-bottom: 10px;
     border-bottom: 1px solid #f5f5f5;
     margin: 10px 0;
+    position: relative;
   }
   &-item-left {
     display: flex;
@@ -431,4 +432,18 @@
   font-size: 13px;
   text-decoration: line-through;
   color: #6d6f71;
+}
+
+.sold-out-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  object-fit: contain;
+}
+
+.content {
+  display: flex;
+  padding: 20px 0;
+  column-gap: 20px;
 }

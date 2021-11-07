@@ -5,6 +5,7 @@ import './ButtonCart.scss';
 
 const ButtonCart = () => {
   const foodCartList = useSelector(selectDetailFoodCart);
+  console.log('🚀 ~ file: index.jsx ~ line 8 ~ ButtonCart ~ foodCartList', foodCartList);
 
   return (
     <div className="fixed bottom-0 right-0">
@@ -17,40 +18,45 @@ const ButtonCart = () => {
             Giỏ hàng <i class="fab fa-shopify checkout-heading-icon"></i>
           </header>
           {/* Empty cart */}
-          {/* <img
-            src="https://travelescapemaldives.biz/jpaywebsite/img/empty_cart.png"
-            style={{ width: '70%', margin: '30px auto' }}
-          /> */}
+          {foodCartList.length === 0 && (
+            <img
+              src="https://travelescapemaldives.biz/jpaywebsite/img/empty_cart.png"
+              style={{ width: '70%', margin: '30px auto' }}
+            />
+          )}
 
           <div className="header__notify-list">
             <ul className="children-cart">
-              {foodCartList.map((food) => (
-                <li
-                  key={food._id}
-                  className="header__notify-btn-item header__notify-btn-item--viewed"
-                >
-                  <div className="header__notify-btn-link">
-                    <div className="children-info">
-                      <img src={food?.photo} className="header__notify-btn-img" />
-                      <div className="header__notify-btn-info">
-                        <span className="header__notify-btn-name">{food?.name}</span>
-                        <span className="header__notify-btn-description">{food?.description}</span>
-                        <span className="header__notify-btn-go">
-                          <Link to={`/detail/${food.restaurant}`}>
-                            Đi tới cửa hàng <i class="fas fa-arrow-right"></i>
-                          </Link>
+              {foodCartList.length !== 0 &&
+                foodCartList.map((food) => (
+                  <li
+                    key={food._id}
+                    className="header__notify-btn-item header__notify-btn-item--viewed"
+                  >
+                    <div className="header__notify-btn-link">
+                      <div className="children-info">
+                        <img src={food?.photo} className="header__notify-btn-img" />
+                        <div className="header__notify-btn-info">
+                          <span className="header__notify-btn-name">{food?.name}</span>
+                          <span className="header__notify-btn-description">
+                            {food?.description}
+                          </span>
+                          <span className="header__notify-btn-go">
+                            <Link to={`/detail/${food.restaurant}`}>
+                              Đi tới cửa hàng <i class="fas fa-arrow-right"></i>
+                            </Link>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <span className="header__notify-btn-name">x {food?.quantityInCart}</span>
+                        <span className="header__notify-btn-description">
+                          {food?.totalFood.toLocaleString()} đ
                         </span>
                       </div>
                     </div>
-                    <div className="flex-shrink-0">
-                      <span className="header__notify-btn-name">x {food?.quantityInCart}</span>
-                      <span className="header__notify-btn-description">
-                        {food?.totalFood.toLocaleString()} đ
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>

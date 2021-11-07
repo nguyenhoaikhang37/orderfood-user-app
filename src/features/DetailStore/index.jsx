@@ -1,8 +1,4 @@
-import {
-  selectStoreList,
-  selectStoreLoading,
-  selectStoreMenuList,
-} from 'features/Store/storeSlice';
+import { selectStoreList, selectStoreLoading } from 'features/Store/storeSlice';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
@@ -69,7 +65,7 @@ const DetailStore = () => {
         ship: 10000,
         total: totalCart,
       };
-      console.log(checkoutCart);
+      // console.log(checkoutCart);
       setLoading(true);
       await orderApi.checkout(checkoutCart);
       setLoading(false);

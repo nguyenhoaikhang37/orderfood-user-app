@@ -79,9 +79,16 @@ const FoodItem = memo(function FoodItem({ food }) {
               </p>
             </div>
           )}
-          <button onClick={handleAddToCart} className="food-price-add">
-            <i className="fas fa-plus-square food-price-icon"></i>
-          </button>
+          {food?.quantity !== 0 ? (
+            <button onClick={handleAddToCart} className="food-price-add">
+              <i className="fas fa-plus-square food-price-icon"></i>
+            </button>
+          ) : (
+            <img
+              src="https://khogiaydantuonggiare.com/uploads/images/catalogue/hethang.png"
+              className="sold-out-img"
+            />
+          )}
         </div>
       </div>
       <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
