@@ -24,6 +24,7 @@ const SignIn = ({ classes }) => {
     } catch (error) {
       console.log('Failed to sign in form submit', error);
       setErrorLogin('Số điện thoại hoặc password không chính xác !!!');
+      setLoading(false);
     }
   };
 

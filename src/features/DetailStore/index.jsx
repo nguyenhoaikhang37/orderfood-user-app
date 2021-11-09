@@ -1,7 +1,7 @@
 import { selectStoreList, selectStoreLoading } from 'features/Store/storeSlice';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { Redirect, useHistory, useParams } from 'react-router';
 import Checkout from './components/Checkout';
 import FeedDetail from './components/FeedDetail';
 import SideDetail from './components/SideDetail';
@@ -16,6 +16,7 @@ import {
 import orderApi from 'apis/orderApi';
 import menuApi from 'apis/menuApi';
 import Swal from 'sweetalert2';
+import { ACCESS_TOKEN } from 'constants/global';
 
 const DetailStore = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const DetailStore = () => {
 
   const [menuList, setMenuList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));
 
   useEffect(() => {
     (async () => {
@@ -51,7 +53,7 @@ const DetailStore = () => {
             idFood: cart._id,
             quantityFood: cart.quantityInCart,
             amount: cart.totalFood,
-            listChoose: cart.choose,
+            listChoose: cart.listChoose,
           })),
         arrayCombo: foodCart
           .filter((food) => food.comboDetails)
@@ -65,13 +67,28 @@ const DetailStore = () => {
         ship: 10000,
         total: totalCart,
       };
-      // console.log(checkoutCart);
-      setLoading(true);
-      await orderApi.checkout(checkoutCart);
-      setLoading(false);
-      Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
-      history.push('/');
-      dispatch(detailActions.deleteFoodCartByRes(idParams.id));
+      console.log('checkoutCart', foodCart);
+      // if (!isLogin) {
+      //   history.push('/auth/signin');
+      //   return;
+      // }
+      // setLoading(true);
+      // const { data } = await orderApi.checkout(checkoutCart);
+      // if (!data.success) {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: `${data.message}`,
+      //   });
+      //   setLoading(false);
+      //   return;
+      // }
+
+      // if (data.success) {
+      //   setLoading(false);
+      //   Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
+      //   history.push('/');
+      //   dispatch(detailActions.deleteFoodCartByRes(idParams.id));
+      // }
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }

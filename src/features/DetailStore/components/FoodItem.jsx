@@ -12,6 +12,7 @@ const FoodItem = memo(function FoodItem({ food }) {
   const handleClose = () => setOpen(false);
 
   const handleAddToCart = () => {
+    if (food.quantity === 0) return;
     if (food.choose.length > 0) {
       handleOpen();
       return;

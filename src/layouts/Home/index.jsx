@@ -6,11 +6,11 @@ import React, { Fragment } from 'react';
 import { Redirect, Route } from 'react-router';
 
 const HomeLayout = ({ Component, ...restProps }) => {
-  const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));
+  // const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));
 
-  if (!isLogin) {
-    return <Redirect to="/auth/signin" />;
-  }
+  // if (!isLogin) {
+  //   return <Redirect to="/auth/signin" />;
+  // }
 
   return (
     <Route

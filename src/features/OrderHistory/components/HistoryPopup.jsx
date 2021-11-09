@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 const HistoryPopup = ({ history }) => {
+  console.log('🚀 ~ file: HistoryPopup.jsx ~ line 4 ~ HistoryPopup ~ history', history);
   return (
     <div>
       <div className="mb-6 text-3xl font-light text-center text-indigo-800 dark:text-white">
@@ -28,8 +29,8 @@ const HistoryPopup = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {history?.cartFood?.map((food) => (
-              <tr>
+            {history?.cartFood?.map((food, idx) => (
+              <tr key={idx}>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                   <div className="flex items-center space-x-4">
                     <img

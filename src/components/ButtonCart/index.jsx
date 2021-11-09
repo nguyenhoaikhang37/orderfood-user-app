@@ -15,7 +15,7 @@ const ButtonCart = () => {
         </div>
         <div className="header__notify">
           <header className="header__notify-header">
-            Giỏ hàng <i class="fab fa-shopify checkout-heading-icon"></i>
+            Giỏ hàng <i className="fab fa-shopify checkout-heading-icon"></i>
           </header>
           {/* Empty cart */}
           {foodCartList.length === 0 && (
@@ -43,7 +43,7 @@ const ButtonCart = () => {
                           </span>
                           <span className="header__notify-btn-go">
                             <Link to={`/detail/${food.restaurant}`}>
-                              Đi tới cửa hàng <i class="fas fa-arrow-right"></i>
+                              Đi tới cửa hàng <i className="fas fa-arrow-right"></i>
                             </Link>
                           </span>
                         </div>
