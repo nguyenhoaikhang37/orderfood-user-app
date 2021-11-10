@@ -68,27 +68,27 @@ const DetailStore = () => {
         total: totalCart,
       };
       console.log('checkoutCart', foodCart);
-      // if (!isLogin) {
-      //   history.push('/auth/signin');
-      //   return;
-      // }
-      // setLoading(true);
-      // const { data } = await orderApi.checkout(checkoutCart);
-      // if (!data.success) {
-      //   Swal.fire({
-      //     icon: 'error',
-      //     title: `${data.message}`,
-      //   });
-      //   setLoading(false);
-      //   return;
-      // }
+      if (!isLogin) {
+        history.push('/auth/signin');
+        return;
+      }
+      setLoading(true);
+      const { data } = await orderApi.checkout(checkoutCart);
+      if (!data.success) {
+        Swal.fire({
+          icon: 'error',
+          title: `${data.message}`,
+        });
+        setLoading(false);
+        return;
+      }
 
-      // if (data.success) {
-      //   setLoading(false);
-      //   Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
-      //   history.push('/');
-      //   dispatch(detailActions.deleteFoodCartByRes(idParams.id));
-      // }
+      if (data.success) {
+        setLoading(false);
+        Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
+        history.push('/');
+        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
+      }
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
