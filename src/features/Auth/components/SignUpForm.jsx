@@ -37,6 +37,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
   const [ward, setWard] = useState();
   const [wardSelect, setWardSelect] = useState();
   const [inputt, setInput] = useState('');
+  const [address, setAddress] = useState();
 
   useEffect(() => {
     (async () => {
@@ -56,7 +57,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
   }, [ward]);
 
   const handleFormSubmit = (formValues) => {
-    onSubmit(formValues);
+    onSubmit({ formValues, address: address.label });
   };
 
   return (
@@ -107,7 +108,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
         </Grid>
         <InputField name="street" control={control} label="Đường" /> */}
 
-        <AddressInput />
+        <AddressInput address={address} setAddress={setAddress} />
 
         <Button
           type="submit"

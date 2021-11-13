@@ -1,13 +1,18 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { detailActions } from '../detailSlice';
 import Images from 'constants/images';
 import FoodCartItem from './FoodCartItem';
 import { CircularProgress } from '@mui/material';
+import Popup from 'components/Popup';
+import PopupCheckout from '../PopupCheckout';
 
-const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckout }) {
+const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckout, storeById }) {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleAddToCart = (food) => {
     dispatch(detailActions.addFoodToCart(food));
@@ -18,12 +23,7 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
   };
 
   const handleCheckoutClick = () => {
-    onCheckout?.({
-      foodCart: foodCart?.filter((food) => food.restaurant === idParams.id),
-      totalCart: foodCart
-        ?.filter((food) => food.restaurant === idParams.id)
-        ?.reduce((total, cur) => total + cur.totalFood, 0),
-    });
+    handleOpen();
   };
 
   return (
@@ -50,23 +50,9 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
           </div>
         )}
       </div>
-      <div className="checkout-ship">
-        <div className="checkout-ship-info">
-          <p className="checkout-name checkout-title">Phí giao hàng</p>
-          <p className="checkout-price">0 đ</p>
-        </div>
-        <div className="checkout-ship-info checkout-promotion">
-          <div className="checkout-name checkout-title">
-            <p>Mã khuyến mãi</p>
-            <p className="checkout-secon">(Thêm mã khuyến mãi)</p>
-          </div>
-          <div className="checkout-price icon-ship">
-            <i className="fas fa-plus-circle checkout-ship-icon"></i>
-          </div>
-        </div>
-      </div>
+
       <div
-        className={`checkout-btn ${
+        className={`checkout-btn mt-4 ${
           foodCart?.filter((food) => food.restaurant === idParams.id).length === 0 &&
           'checkout-disabled'
         } `}
@@ -88,6 +74,15 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
           </p>
         </button>
       </div>
+      <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
+        <PopupCheckout
+          onCheckout={onCheckout}
+          foodCart={foodCart}
+          idParams={idParams}
+          storeById={storeById}
+          loading={loading}
+        />
+      </Popup>
     </div>
   );
 });

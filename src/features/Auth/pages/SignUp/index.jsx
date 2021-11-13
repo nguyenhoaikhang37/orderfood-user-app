@@ -6,22 +6,17 @@ import React, { Fragment } from 'react';
 import userApi from 'apis/userApi';
 
 const SignUp = ({ classes }) => {
-  const handleSubmitForm = async (formValues) => {
+  const handleSubmitForm = async ({ formValues, address }) => {
     const formatFormValues = {
       phoneNumber: formValues.phoneNumber,
       password: formValues.password,
       confirmPassword: formValues.confirmPassword,
       fullName: formValues.fullName,
-      address: {
-        city: 'TP.HCM',
-        district: formValues.district,
-        ward: formValues.ward,
-        street: formValues.street,
-      },
+      address,
     };
 
     try {
-     const res= await userApi.dangKy(formatFormValues)
+      const res = await userApi.dangKy(formatFormValues);
     } catch (error) {
       console.log('Failed to sign up form submit', error);
     }

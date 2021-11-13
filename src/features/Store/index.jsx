@@ -1,4 +1,6 @@
 import { LinearProgress } from '@mui/material';
+import Hero from 'components/Hero';
+import ListStep from 'components/ListStep';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Filter from './components/Filter';
@@ -14,6 +16,7 @@ const Store = () => {
 
   return (
     <div className="container">
+      <Hero />
       <div className="content">
         {/* Sidebar */}
         <Sidebar categoryList={categoryList} />
@@ -29,6 +32,7 @@ const Store = () => {
           )}
         </div>
       </div>
+      <ListStep />
     </div>
   );
 };

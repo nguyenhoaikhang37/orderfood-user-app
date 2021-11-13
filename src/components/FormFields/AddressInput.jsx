@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
 
-export default function AddressInput() {
-  const [address, setAddress] = useState();
+export default function AddressInput({ address, setAddress }) {
   const [addressObj, setAddressObj] = useState();
 
   const getAddressObject = (address_components) => {
@@ -75,9 +74,9 @@ export default function AddressInput() {
           onChange: (val) => {
             setAddress(val);
           },
-                    placeholder: "Địa chỉ",
-                    noOptionsMessage: () => "Không tìm thấy địa chỉ phù hợp!",
-                    loadingMessage: () => "Tìm kiếm..",
+          placeholder: 'Địa chỉ',
+          noOptionsMessage: () => 'Không tìm thấy địa chỉ phù hợp!',
+          loadingMessage: () => 'Tìm kiếm..',
           styles: {
             input: (provided) => ({
               ...provided,

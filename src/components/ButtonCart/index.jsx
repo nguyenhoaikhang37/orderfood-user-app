@@ -38,6 +38,10 @@ const ButtonCart = () => {
                         <img src={food?.photo} className="header__notify-btn-img" />
                         <div className="header__notify-btn-info">
                           <span className="header__notify-btn-name">{food?.name}</span>
+                          <span className="text-xs italic text-gray-800">
+                            {food?.listChoose && 'Món kèm: '}
+                            {food?.listChoose?.map((choose) => choose.name).join(' ')}
+                          </span>
                           <span className="header__notify-btn-description">
                             {food?.description}
                           </span>

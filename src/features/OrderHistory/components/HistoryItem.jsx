@@ -2,6 +2,9 @@ import { useState } from 'react';
 import moment from 'moment';
 import Popup from 'components/Popup';
 import HistoryPopup from './HistoryPopup';
+import { Button } from '@mui/material';
+import orderApi from '../../../apis/orderApi';
+import Swal from 'sweetalert2';
 
 moment.locale('vi');
 
@@ -9,6 +12,29 @@ const HistoryItem = ({ history, index }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleDeleteOrder = (id) => {
+    try {
+      Swal.fire({
+        title: 'Bạn chắn chắn muốn xoá đơn hàng này?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#10B981',
+        cancelButtonColor: '#F87171',
+        cancelButtonText: 'Huỷ',
+        confirmButtonText: 'Có, tôi chắc chắn!',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await orderApi.deleteOrder(id);
+
+          Swal.fire('Deleted!', 'Bạn đã xoá đơn hàng thành công.', 'success');
+          window.location.reload();
+        }
+      });
+    } catch (error) {
+      console.log('🚀 ~ file: HistoryItem.jsx ~ line 33 ~ handleDeleteOrder ~ error', error);
+    }
+  };
 
   return (
     <>
@@ -36,13 +62,23 @@ const HistoryItem = ({ history, index }) => {
         </td>
         <td className="px-3 py-4 whitespace-no-wrap border-b text-gray-900 border-gray-500 text-xs leading-5">
           {history?.status === 0 ? (
-            <span className="relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight">
-              <span
-                aria-hidden
-                className="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
-              />
-              <span className="relative text-xs">Chờ xác nhận</span>
-            </span>
+            <>
+              <span className="text-center relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight">
+                <span
+                  aria-hidden
+                  className="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"
+                />
+                <span className="relative text-xs">Chờ xác nhận</span>
+              </span>
+              <Button
+                onClick={() => handleDeleteOrder(history?._id)}
+                sx={{ marginTop: '10px' }}
+                color="secondary"
+                variant="outlined"
+              >
+                Xoá đơn hàng <i class="fas fa-trash-alt"></i>
+              </Button>
+            </>
           ) : history?.status === 1 ? (
             <span className="relative inline-block px-3 py-1 font-semibold text-indigo-900 leading-tight">
               <span

@@ -45,6 +45,7 @@ const DetailStore = () => {
   }, []);
 
   const handleCheckout = async ({ foodCart, totalCart }) => {
+    console.log(foodCart, totalCart);
     try {
       const checkoutCart = {
         arrayFood: foodCart
@@ -67,7 +68,6 @@ const DetailStore = () => {
         ship: 10000,
         total: totalCart,
       };
-      console.log('checkoutCart', foodCart);
       if (!isLogin) {
         history.push('/auth/signin');
         return;
@@ -82,7 +82,6 @@ const DetailStore = () => {
         setLoading(false);
         return;
       }
-
       if (data.success) {
         setLoading(false);
         Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
@@ -110,6 +109,7 @@ const DetailStore = () => {
             onCheckout={handleCheckout}
             foodCart={foodCart}
             loading={loading}
+            storeById={storeById}
           />
         </div>
       </div>

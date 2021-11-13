@@ -39,6 +39,9 @@ const HistoryPopup = ({ history }) => {
                     />
                     <div>
                       <p className="font-bold">{food?.idFood?.name}</p>
+                      <p className="italic">
+                        {food?.listChoose?.map((choose) => choose._id.name).join(', ')}
+                      </p>
                     </div>
                   </div>
                 </td>

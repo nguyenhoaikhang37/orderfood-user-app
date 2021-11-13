@@ -44,6 +44,16 @@ const orderApi = {
       },
     });
   },
+  deleteOrder(id) {
+    const url = `/order/cancel/user/${id}`;
+    return axiosClient({
+      url,
+      method: 'PUT',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+  },
 };
 
 export default orderApi;
