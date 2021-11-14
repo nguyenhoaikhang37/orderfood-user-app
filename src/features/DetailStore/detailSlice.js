@@ -16,7 +16,7 @@ const detailSlice = createSlice({
   initialState: {
     loading: false,
     foodList: [],
-    foodCart: [],
+    foodCart: JSON.parse(localStorage.getItem('food_cart')) || [],
   },
   reducers: {
     addFoodToCart(state, action) {
@@ -32,6 +32,7 @@ const detailSlice = createSlice({
             (action.payload.lastPrice + priceInListChoose) *
             (state.foodCart[foundIndex]?.quantityInCart + 1),
         };
+        localStorage.setItem('food_cart', JSON.stringify(newFoodCart));
         return { ...state, foodCart: newFoodCart };
       } else {
         newFoodCart.push({
@@ -39,6 +40,7 @@ const detailSlice = createSlice({
           quantityInCart: 1,
           totalFood: action.payload.lastPrice + priceInListChoose,
         });
+        localStorage.setItem('food_cart', JSON.stringify(newFoodCart));
         return { ...state, foodCart: newFoodCart };
       }
     },
@@ -57,16 +59,28 @@ const detailSlice = createSlice({
             (state.foodCart[foundIndex]?.quantityInCart - 1),
         };
 
-        return state.foodCart[foundIndex]?.quantityInCart - 1 !== 0
-          ? { ...state, foodCart: newFoodCart }
-          : {
-              ...state,
-              foodCart: newFoodCart.filter((food) => food._id !== state.foodCart[foundIndex]._id),
-            };
+        if (state.foodCart[foundIndex]?.quantityInCart - 1 !== 0) {
+          localStorage.setItem('food_cart', JSON.stringify(newFoodCart));
+
+          return { ...state, foodCart: newFoodCart };
+        } else {
+          const foodCartWithQuantityEqualZero = newFoodCart.filter(
+            (food) => food._id !== state.foodCart[foundIndex]._id
+          );
+          localStorage.setItem('food_cart', JSON.stringify(foodCartWithQuantityEqualZero));
+
+          return {
+            ...state,
+            foodCart: foodCartWithQuantityEqualZero,
+          };
+        }
       }
     },
     deleteFoodCartByRes(state, action) {
-      return { ...state, foodCart: state.foodCart.filter(cart => cart.restaurant != action.payload) };
+      return {
+        ...state,
+        foodCart: state.foodCart.filter((cart) => cart.restaurant != action.payload),
+      };
     },
   },
   extraReducers: {
