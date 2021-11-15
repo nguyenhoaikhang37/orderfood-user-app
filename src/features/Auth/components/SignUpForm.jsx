@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import AddressInput from 'components/FormFields/AddressInput';
+import { CircularProgress } from '@mui/material';
 
 const schema = yup.object().shape({
   phoneNumber: yup
@@ -29,7 +30,7 @@ const schema = yup.object().shape({
   // street: yup.string().required('Tên đường không được để trống!'),
 });
 
-const SignUpForm = ({ classes, onSubmit }) => {
+const SignUpForm = ({ classes, onSubmit, loading }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -57,7 +58,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
   }, [ward]);
 
   const handleFormSubmit = (formValues) => {
-    onSubmit({ formValues, address: address.label });
+    onSubmit?.({ formValues, address });
   };
 
   return (
@@ -117,6 +118,7 @@ const SignUpForm = ({ classes, onSubmit }) => {
           color="secondary"
           className={classes.submit}
         >
+          {loading && <CircularProgress size="1rem" color="inherit" />}
           Sign Up
         </Button>
         <Grid container justifyContent="flex-end">

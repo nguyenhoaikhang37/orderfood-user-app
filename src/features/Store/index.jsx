@@ -15,25 +15,27 @@ const Store = () => {
   const storeList = useSelector(selectStoreList);
 
   return (
-    <div className="container">
+    <>
       <Hero />
-      <div className="content">
-        {/* Sidebar */}
-        <Sidebar categoryList={categoryList} />
-        {/* Feed */}
-        <div className="store-main">
-          {/* Filter */}
-          {/* <Filter /> */}
-          {/* Store List */}
-          {loadingStore ? (
-            <LinearProgress style={{ marginTop: '40px' }} />
-          ) : (
-            <StoreList storeList={storeList} />
-          )}
+      <div className="container">
+        <div className="content">
+          {/* Sidebar */}
+          <Sidebar categoryList={categoryList} />
+          {/* Feed */}
+          <div className="store-main">
+            {/* Filter */}
+            {/* <Filter /> */}
+            {/* Store List */}
+            {loadingStore ? (
+              <LinearProgress style={{ marginTop: '40px' }} />
+            ) : (
+              <StoreList storeList={storeList} />
+            )}
+          </div>
         </div>
+        <ListStep />
       </div>
-      <ListStep />
-    </div>
+    </>
   );
 };
 

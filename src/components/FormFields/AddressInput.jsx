@@ -39,7 +39,6 @@ const Option = (props) => {
 
 export default function AddressInput({ address, setAddress }) {
   const [addressObj, setAddressObj] = useState();
-  console.log('🚀 ~ file: AddressInput.jsx ~ line 5 ~ AddressInput ~ address', address);
 
   const getAddressObject = (address_components) => {
     const ShouldBeComponent = {

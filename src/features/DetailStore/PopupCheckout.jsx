@@ -29,6 +29,13 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
               width="100%"
               loading="lazy"
             ></iframe>
+            {/* Lấy map từ lat lng */}
+            {/* <iframe
+        height="350"
+        width="100%"
+        loading="lazy"
+        src="https://maps.google.com/maps?q=10.8065148,106.6288567&hl=es&z=14&amp;output=embed"
+      ></iframe> */}
           </div>
           <div className=" text-sm mt-2">
             <p className="font-semibold">
