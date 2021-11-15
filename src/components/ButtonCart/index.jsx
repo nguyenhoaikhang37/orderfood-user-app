@@ -13,7 +13,7 @@ const ButtonCart = () => {
         <div className=" w-16 h-16 mr-12 mb-8 cursor-pointer animate-wiggle">
           <img src="https://cdn-icons-png.flaticon.com/512/1040/1040254.png" />
         </div>
-        <div className="header__notify">
+        <div className="header__notify" style={{ zIndex: '101 !important' }}>
           <header className="header__notify-header">
             Giỏ hàng <i className="fab fa-shopify checkout-heading-icon"></i>
           </header>

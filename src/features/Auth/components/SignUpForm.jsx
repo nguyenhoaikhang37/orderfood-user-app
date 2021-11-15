@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   confirmPassword: yup
     .string()
     .required('Xác nhận mật khẩu không được để trống!')
-    .oneOf([yup.ref('password'), null], 'Mật khẩu không trùng khớp!'),
+    .oneOf([yup.ref('password')], 'Mật khẩu không trùng khớp!'),
   // district: yup.string().required('Vui lòng chọn quận, huyện!'),
   // ward: yup.string().required('Vui lòng chọn phường, xã!'),
   // street: yup.string().required('Tên đường không được để trống!'),

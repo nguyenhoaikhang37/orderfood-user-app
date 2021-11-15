@@ -23,7 +23,7 @@ const Store = () => {
         {/* Feed */}
         <div className="store-main">
           {/* Filter */}
-          <Filter />
+          {/* <Filter /> */}
           {/* Store List */}
           {loadingStore ? (
             <LinearProgress style={{ marginTop: '40px' }} />

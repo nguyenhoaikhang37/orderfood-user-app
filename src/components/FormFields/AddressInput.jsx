@@ -1,8 +1,45 @@
 import { useState, useEffect } from 'react';
-import GooglePlacesAutocomplete, { geocodeByPlaceId } from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete, {
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-google-places-autocomplete';
+
+const Option = (props) => {
+  const {
+    className,
+    cx,
+    getStyles,
+    isDisabled,
+    isFocused,
+    isSelected,
+    innerRef,
+    innerProps,
+    data,
+  } = props;
+  return (
+    <div
+      ref={innerRef}
+      style={getStyles('option', props)}
+      className={cx(
+        {
+          option: true,
+          'option--is-disabled': isDisabled,
+          'option--is-focused': isFocused,
+          'option--is-selected': isSelected,
+        },
+        className
+      )}
+      {...innerProps}
+    >
+      <div style={{ fontSize: 14 }}>{data.value.structured_formatting.main_text}</div>
+      <span style={{ fontSize: 11 }}>{data.value.structured_formatting.secondary_text}</span>
+    </div>
+  );
+};
 
 export default function AddressInput({ address, setAddress }) {
   const [addressObj, setAddressObj] = useState();
+  console.log('🚀 ~ file: AddressInput.jsx ~ line 5 ~ AddressInput ~ address', address);
 
   const getAddressObject = (address_components) => {
     const ShouldBeComponent = {
@@ -51,15 +88,26 @@ export default function AddressInput({ address, setAddress }) {
       const geocodeObj =
         address && address.value && (await geocodeByPlaceId(address.value.place_id));
       const addressObject = geocodeObj && getAddressObject(geocodeObj[0].address_components);
-      console.log('addressObject', addressObject);
       setAddressObj(addressObject);
     };
     func();
   }, [address]);
 
+  const handleSelectPlace = (place) => {
+    geocodeByPlaceId(place.value.place_id)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        setAddress({
+          lat,
+          lng,
+          name: place.label,
+        });
+      });
+  };
+
   return (
     <div>
-      <GooglePlacesAutocomplete
+      {/* <GooglePlacesAutocomplete
         apiOptions={{ language: 'vi', region: 'vn' }}
         autocompletionRequest={{
           location: { lat: 10.7757, lng: 106.7004 },
@@ -71,9 +119,8 @@ export default function AddressInput({ address, setAddress }) {
         selectProps={{
           isClearable: true,
           value: address,
-          onChange: (val) => {
-            setAddress(val);
-          },
+
+          onChange: handleSelectPlace,
           placeholder: 'Địa chỉ',
           noOptionsMessage: () => 'Không tìm thấy địa chỉ phù hợp!',
           loadingMessage: () => 'Tìm kiếm..',
@@ -93,6 +140,29 @@ export default function AddressInput({ address, setAddress }) {
               },
             }),
           },
+        }}
+      /> */}
+      <GooglePlacesAutocomplete
+        apiOptions={{ language: 'vi', region: 'vn' }}
+        autocompletionRequest={{
+          location: { lat: 10.7757, lng: 106.7004 },
+          radius: 1000,
+          componentRestrictions: {
+            country: ['vn'],
+          },
+        }}
+        selectProps={{
+          placeholder: 'Địa chỉ',
+          className: `pito__place-container`,
+          classNamePrefix: 'pito__place',
+          onChange: handleSelectPlace,
+          components: {
+            DropdownIndicator: () => null,
+            IndicatorSeparator: () => null,
+            Option,
+          },
+          noOptionsMessage: () => 'Không tìm thấy địa chỉ phù hợp!',
+          loadingMessage: () => 'Tìm kiếm..',
         }}
       />
     </div>
@@ -142,7 +212,7 @@ export default function AddressInput({ address, setAddress }) {
 //   );
 // };
 
-// function PlaceInput({ setLocation, customClassName = "" }) {
+// function PlaceInput({ setLocation, customClassName = '' }) {
 //   const handleSelectPlace = (place) => {
 //     geocodeByPlaceId(place.value.place_id)
 //       .then((results) => getLatLng(results[0]))
@@ -150,36 +220,38 @@ export default function AddressInput({ address, setAddress }) {
 //         setLocation({
 //           lat,
 //           lng,
-//           name: place.label
+//           name: place.label,
 //         });
 //       });
 //   };
 
 //   return (
 //     <GooglePlacesAutocomplete
-//       apiOptions={{ language: "vi", region: "vn" }}
+//       apiOptions={{ language: 'vi', region: 'vn' }}
 //       autocompletionRequest={{
 //         location: { lat: 10.7757, lng: 106.7004 },
 //         radius: 1000,
 //         componentRestrictions: {
-//           country: ["vn"]
-//         }
+//           country: ['vn'],
+//         },
 //       }}
 //       selectProps={{
-//         placeholder: "Địa chỉ",
+//         placeholder: 'Địa chỉ',
 //         className: `pito__place-container ${customClassName}`,
-//         classNamePrefix: "pito__place",
+//         classNamePrefix: 'pito__place',
 //         onChange: handleSelectPlace,
 //         components: {
 //           DropdownIndicator: () => null,
 //           IndicatorSeparator: () => null,
-//           Option
+//           Option,
 //         },
-//         noOptionsMessage: () => "Không tìm thấy địa chỉ phù hợp!",
-//         loadingMessage: () => "Tìm kiếm.."
+//         noOptionsMessage: () => 'Không tìm thấy địa chỉ phù hợp!',
+//         loadingMessage: () => 'Tìm kiếm..',
 //       }}
 //     />
 //   );
 // }
 
 // export default PlaceInput;
+
+// API key AIzaSyDOR0RrkeXb4JCKO_aD1RITLQiJJZByR50
