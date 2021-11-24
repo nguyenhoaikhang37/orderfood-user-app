@@ -23,6 +23,7 @@ const SignUp = ({ classes }) => {
     };
 
     try {
+      console.log(formatFormValues);
       setLoading(true);
       await userApi.dangKy(formatFormValues);
       setLoading(true);

@@ -12,6 +12,7 @@ const Header = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem('food_cart');
     window.location.reload();
   };
 

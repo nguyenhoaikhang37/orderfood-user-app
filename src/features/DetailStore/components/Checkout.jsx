@@ -7,9 +7,19 @@ import FoodCartItem from './FoodCartItem';
 import { CircularProgress } from '@mui/material';
 import Popup from 'components/Popup';
 import PopupCheckout from '../PopupCheckout';
+import { ACCESS_TOKEN } from 'constants/global';
+import { useHistory } from 'react-router';
 
-const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckout, storeById }) {
+const Checkout = memo(function Checkout({
+  foodCart,
+  idParams,
+  loading,
+  onCheckout,
+  storeById,
+  isError,
+}) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,6 +33,10 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
   };
 
   const handleCheckoutClick = () => {
+    const isLogged = localStorage.getItem(ACCESS_TOKEN);
+    if (!isLogged) {
+      history.push('/auth/signin');
+    }
     handleOpen();
   };
 
@@ -81,6 +95,7 @@ const Checkout = memo(function Checkout({ foodCart, idParams, loading, onCheckou
           idParams={idParams}
           storeById={storeById}
           loading={loading}
+          isError={isError}
         />
       </Popup>
     </div>

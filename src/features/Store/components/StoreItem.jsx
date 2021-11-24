@@ -12,10 +12,7 @@ const StoreItem = memo(function StoreItem({ store }) {
         <div className="home-product-item__name">
           <Link to={`/detail/${store._id}`}> {store.name}</Link>
         </div>
-        <div className="home-product-item__secon">
-          {store.location.street}, {store.location.ward}, {store.location.district},
-          {store.location.city}.
-        </div>
+        <div className="home-product-item__secon">{store?.location}</div>
         <div className="home-product-item__action">
           <div className="home-product-item__rating">
             <i className="home-product-item__star--gold fas fa-star" />

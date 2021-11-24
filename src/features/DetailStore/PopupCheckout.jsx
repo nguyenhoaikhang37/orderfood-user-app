@@ -1,10 +1,33 @@
-import { CircularProgress } from '@mui/material';
+import { Alert, Checkbox, CircularProgress } from '@mui/material';
+import axios from 'axios';
 import { selectAuthUser } from 'features/Auth/authSlice';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) => {
+const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isError }) => {
   const user = useSelector(selectAuthUser);
+  const [payment, setPayment] = useState();
+  console.log('🚀 ~ file: PopupCheckout.jsx ~ line 11 ~ PopupCheckout ~ payment', payment);
+  const [shipMoney, setShipMoney] = useState(0);
+  const [shipList, setShipList] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get(
+        `https://server-express-foodapp.herokuapp.com/api/order/haversine?latStart=${storeById?.lat}&lngStart=${storeById?.lng}&latEnd=${user?.profile?.lat}&lngEnd=${user?.profile?.lng}`
+      );
+      setShipMoney(res.data.km);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get(`https://server-express-foodapp.herokuapp.com/api/pay`);
+      setShipList(res.data.pay);
+      setPayment(res.data.pay[0]._id);
+    })();
+  }, []);
 
   const handleCheckoutPopup = () => {
     onCheckout?.({
@@ -12,7 +35,19 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
       totalCart: foodCart
         ?.filter((food) => food.restaurant === idParams.id)
         ?.reduce((total, cur) => total + cur.totalFood, 0),
+      pay: payment,
     });
+  };
+
+  const getShipMoney = (km) => {
+    let money = 0;
+    if (km < 4) {
+      money = 20000;
+    } else {
+      money = km * 5000;
+    }
+
+    return Math.round(money);
   };
 
   return (
@@ -42,10 +77,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
               <i class="fas fa-circle text-red-500 mr-1"></i>
               {storeById?.name} - {storeById?.phoneNumber}{' '}
             </p>
-            <p>
-              {storeById?.location.street}, {storeById?.location.ward},{' '}
-              {storeById?.location.district},{storeById?.location.city}.
-            </p>
+            <p>{storeById?.location}</p>
           </div>
           <div className=" text-sm mt-2">
             <p className="font-semibold">
@@ -56,7 +88,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
           </div>
         </div>
         <div className="w-6/12">
-          <div style={{ height: '350px' }} className="overflow-y-scroll pr-2 popup-checkout-scroll">
+          <div style={{ height: '250px' }} className="overflow-y-scroll pr-2 popup-checkout-scroll">
             <p className="text-center mb-2" style={{ color: '#ee4d2d' }}>
               Chi tiết đơn hàng
             </p>
@@ -85,14 +117,36 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
               ))}
           </div>
 
-          <div className="text-sm font-semibold">Chọn hình thức thanh toán</div>
+          <div>
+            <p className="checkout-name checkout-title">Chọn hình thức thanh toán</p>
+            <div>
+              {shipList.map((ship) => (
+                <div className="flex items-center text-sm">
+                  <Checkbox
+                    checked={payment === ship?._id}
+                    onChange={() => setPayment(ship?._id)}
+                  />
+                  <label className="text-gray-900">{ship?.name}</label>
+                </div>
+              ))}
+
+              {/* <div className="flex items-center text-sm">
+                <Checkbox checked={payment === 1} onChange={() => setPayment(1)} />
+                <label className="text-gray-900">Giao hàng</label>
+              </div>
+              <div className="flex items-center text-sm">
+                <Checkbox checked={payment === 2} onChange={() => setPayment(2)} />
+                <label className="text-gray-900">Thanh toán qua thẻ</label>
+              </div> */}
+            </div>
+          </div>
           <div className="checkout-ship">
             <div className="checkout-ship-info">
               <p className="checkout-name checkout-title">Phí giao hàng</p>
-              <p className="checkout-price">0 đ</p>
+              <p className="checkout-price">{getShipMoney(shipMoney).toLocaleString()} đ</p>
             </div>
 
-            <div className="checkout-ship-info checkout-promotion">
+            <div className="checkout-ship-info checkout-promotion mb-1">
               <div className="checkout-name checkout-title">
                 <p>Mã khuyến mãi</p>
                 <p className="checkout-secon">(Thêm mã khuyến mãi)</p>
@@ -102,6 +156,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
                 <i className="fas fa-plus-circle checkout-ship-icon"></i>
               </div>
             </div>
+            {isError && <Alert severity="error">Số coin trong ví hiện không đủ!</Alert>}
           </div>
         </div>
       </div>
@@ -116,10 +171,11 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading }) =
           <i class="fas fa-arrow-right ml-2"></i>
         </span>
         <span>
-          {foodCart
-            ?.filter((food) => food.restaurant === idParams.id)
-            ?.reduce((total, cur) => total + cur.totalFood, 0)
-            .toLocaleString()}{' '}
+          {(
+            foodCart
+              ?.filter((food) => food.restaurant === idParams.id)
+              ?.reduce((total, cur) => total + cur.totalFood, 0) + getShipMoney(shipMoney)
+          ).toLocaleString()}{' '}
           đ
         </span>
       </button>

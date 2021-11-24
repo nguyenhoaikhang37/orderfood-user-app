@@ -16,7 +16,6 @@ import {
 import orderApi from 'apis/orderApi';
 import menuApi from 'apis/menuApi';
 import Swal from 'sweetalert2';
-import { ACCESS_TOKEN } from 'constants/global';
 
 const DetailStore = () => {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const DetailStore = () => {
 
   const [menuList, setMenuList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -44,8 +43,7 @@ const DetailStore = () => {
     dispatch(fetchFoodByRes(idParams.id));
   }, []);
 
-  const handleCheckout = async ({ foodCart, totalCart }) => {
-    console.log(foodCart, totalCart);
+  const handleCheckout = async ({ foodCart, totalCart, pay }) => {
     try {
       const checkoutCart = {
         arrayFood: foodCart
@@ -64,14 +62,12 @@ const DetailStore = () => {
             amount: cart.totalFood,
           })),
         restaurant: storeById._id,
-        pay: '61614a21855f83b83e611b80',
+        pay,
         ship: 10000,
         total: totalCart,
       };
-      if (!isLogin) {
-        history.push('/auth/signin');
-        return;
-      }
+      console.log({ checkoutCart });
+
       setLoading(true);
       const { data } = await orderApi.checkout(checkoutCart);
       if (!data.success) {
@@ -79,7 +75,6 @@ const DetailStore = () => {
           icon: 'error',
           title: `${data.message}`,
         });
-        setLoading(false);
         return;
       }
       if (data.success) {
@@ -87,10 +82,13 @@ const DetailStore = () => {
         Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
         history.push('/');
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
+        setIsError(false);
       }
     } catch (error) {
+      setIsError(true);
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
+    setLoading(false);
   };
 
   return (
@@ -110,6 +108,7 @@ const DetailStore = () => {
             foodCart={foodCart}
             loading={loading}
             storeById={storeById}
+            isError={isError}
           />
         </div>
       </div>

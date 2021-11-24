@@ -32,12 +32,7 @@ const StoreInfo = memo(function StoreInfo({ storeInfo, loading }) {
           <span className="text-xs text-coolGray-600 italic">
             Giao hàng trong: {storeInfo?.duration}
           </span>
-          {storeInfo && (
-            <p>
-              {storeInfo?.location.street}, {storeInfo?.location.ward},{' '}
-              {storeInfo?.location.district},{storeInfo?.location.city}.
-            </p>
-          )}
+          {storeInfo && <p>{storeInfo?.location}</p>}
           <div className="flex space-x-4 items-center">
             <p className="flex items-center" style={{ position: 'relative', color: '#5fb042' }}>
               <i style={{ fontSize: '7px', marginRight: '5px' }} className="fas fa-circle"></i>
