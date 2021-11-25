@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import StoreItem from './StoreItem';
 
-const StoreList = memo(function StoreList({ storeList }) {
+const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStoreList }) {
   return (
     <Fragment>
       <div className="product-address">
@@ -11,10 +11,37 @@ const StoreList = memo(function StoreList({ storeList }) {
         Danh sách địa chỉ quán
       </div>
 
+      {searchStoreList.length === 0 && (
+        <div className="home-product">
+          <div className="row sm-gutter">
+            {/* Store Item */}
+            {storeList?.map((store) => (
+              <StoreItem key={store._id} store={store} />
+            ))}
+          </div>
+        </div>
+      )}
+      {searchStoreList.length !== 0 && (
+        <div className="home-product">
+          <div className="row sm-gutter">
+            {/* Store Item */}
+            {searchStoreList?.map((store) => (
+              <StoreItem key={store._id} store={store} />
+            ))}
+          </div>
+        </div>
+      )}
+      {nearStoreList && (
+        <div className="product-address">
+          <i className="fas fa-map-marker-alt address-icon"></i>
+          Quán gần tôi
+        </div>
+      )}
+
       <div className="home-product">
         <div className="row sm-gutter">
           {/* Store Item */}
-          {storeList.map((store) => (
+          {nearStoreList?.map((store) => (
             <StoreItem key={store._id} store={store} />
           ))}
         </div>

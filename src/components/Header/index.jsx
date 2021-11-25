@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import Images from 'constants/images';
@@ -6,14 +6,22 @@ import { useSelector } from 'react-redux';
 import { selectAuthUser } from 'features/Auth/authSlice';
 import Avatar from '@mui/material/Avatar';
 import { ACCESS_TOKEN } from 'constants/global';
+import { useDispatch } from 'react-redux';
+import { storeActions } from 'features/Store/storeSlice';
 
 const Header = () => {
   const user = useSelector(selectAuthUser);
+  const [searchInput, setSearchInput] = useState('');
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem('food_cart');
     window.location.reload();
+  };
+
+  const handleSearchButton = () => {
+    dispatch(storeActions.searchStore(searchInput));
   };
 
   return (
@@ -36,12 +44,12 @@ const Header = () => {
             {!user ? (
               <>
                 <li id="register-item" className="header__navbar-item header__navbar-item-separate">
-                  <Link style={{ color: '#fff' }} to="auth/signup">
+                  <Link style={{ color: '#fff' }} to="/auth/signup">
                     Đăng Ký
                   </Link>
                 </li>
                 <li id="login-item" className="header__navbar-item">
-                  <Link style={{ color: '#fff' }} to="auth/signin">
+                  <Link style={{ color: '#fff' }} to="/auth/signin">
                     Đăng Nhập
                   </Link>
                 </li>
@@ -91,6 +99,7 @@ const Header = () => {
           <div className="header__search">
             <div className="header__search-input-wrap">
               <input
+                onChange={(e) => setSearchInput(e.target.value)}
                 type="text"
                 className="header__search-input"
                 placeholder="Tìm địa điểm, món ăn, địa chỉ,..."
@@ -109,7 +118,10 @@ const Header = () => {
                 </ul>
               </div>
             </div>
-            <button className="header__search-btn hide-on-mobile-tablet">
+            <button
+              onClick={handleSearchButton}
+              className="header__search-btn hide-on-mobile-tablet"
+            >
               <i className="header__search-btn-icon fas fa-search" />
             </button>
           </div>
