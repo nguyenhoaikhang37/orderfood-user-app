@@ -22,7 +22,6 @@ const Store = () => {
   const storeList = useSelector(selectStoreList);
   const nearStoreList = useSelector(selectNearStoreList);
   const searchStoreList = useSelector(selectSearchStoreList);
-  console.log('🚀 ~ file: index.jsx ~ line 25 ~ Store ~ searchStoreList', searchStoreList);
 
   const [filterStore, setFilterStore] = useState();
   const [activeCate, setActiveCate] = useState('all');

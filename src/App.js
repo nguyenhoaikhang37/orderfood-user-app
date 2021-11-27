@@ -31,10 +31,10 @@ function App() {
     dispatch(fetchMenuList());
     dispatch(fetchStoreList());
     dispatch(getUserToken(token));
-    if (user._id) {
+    if (user?._id) {
       dispatch(fetchNearStoreList({ lat: user?.profile?.lat, lng: user?.profile?.lng }));
     }
-  }, [user._id]);
+  }, [user?._id]);
 
   return (
     <Router history={history}>

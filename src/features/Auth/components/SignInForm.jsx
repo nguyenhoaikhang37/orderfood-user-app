@@ -23,7 +23,11 @@ const schema = yup.object().shape({
 });
 
 const SignInForm = ({ classes, loading, onSubmit }) => {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -46,8 +50,9 @@ const SignInForm = ({ classes, loading, onSubmit }) => {
           variant="contained"
           color="secondary"
           className={classes.submit}
+          disabled={isSubmitting}
         >
-          {loading && <CircularProgress size="1rem" color="inherit" />}
+          {isSubmitting && <CircularProgress size="1rem" color="inherit" />}
           Sign In
         </Button>
         <Grid container justifyContent="flex-end">

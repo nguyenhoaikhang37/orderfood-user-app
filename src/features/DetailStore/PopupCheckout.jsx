@@ -58,19 +58,19 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
       <div className="flex space-x-4">
         <div className="w-6/12">
           <div className="w-full" style={{ height: '350px' }}>
-            <iframe
+            {/* <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.9003686095166!2d106.6266680143946!3d10.806520061593472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBUaOG7sWMgcGjhuqltIFRQLkhDTQ!5e1!3m2!1svi!2s!4v1636722326189!5m2!1svi!2s"
               height="350"
               width="100%"
               loading="lazy"
-            ></iframe>
+            ></iframe> */}
             {/* Lấy map từ lat lng */}
-            {/* <iframe
-        height="350"
-        width="100%"
-        loading="lazy"
-        src="https://maps.google.com/maps?q=10.8065148,106.6288567&hl=es&z=14&amp;output=embed"
-      ></iframe> */}
+            <iframe
+              height="350"
+              width="100%"
+              loading="lazy"
+              src={`https://maps.google.com/maps?q=${storeById.lat},${storeById.lng}&hl=es&z=14&output=embed`}
+            ></iframe>
           </div>
           <div className=" text-sm mt-2">
             <p className="font-semibold">
@@ -143,7 +143,9 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
           <div className="checkout-ship">
             <div className="checkout-ship-info">
               <p className="checkout-name checkout-title">Phí giao hàng</p>
-              <p className="checkout-price">{getShipMoney(shipMoney).toLocaleString()} đ</p>
+              <p className="checkout-price">
+                {shipMoney?.toFixed(1)} km - {getShipMoney(shipMoney)?.toLocaleString()} đ
+              </p>
             </div>
 
             <div className="checkout-ship-info checkout-promotion mb-1">
