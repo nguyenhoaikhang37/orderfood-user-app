@@ -31,7 +31,7 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
           </div>
         </div>
       )}
-      {nearStoreList && (
+      {nearStoreList.length !== 0 && (
         <div className="product-address">
           <i className="fas fa-map-marker-alt address-icon"></i>
           Quán gần tôi

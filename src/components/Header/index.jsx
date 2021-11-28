@@ -106,7 +106,7 @@ const Header = () => {
               />
               <i className="header__search-camera fas fa-camera " />
               {/* Search history */}
-              <div className="header__search-history">
+              {/* <div className="header__search-history">
                 <div className="header__search-history-heading">Lịch sử tìm kiếm</div>
                 <ul className="header__search-history-list">
                   <li className="header__search-history-item">
@@ -116,7 +116,7 @@ const Header = () => {
                     <a href="#">Cặp sách</a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
             <button
               onClick={handleSearchButton}
