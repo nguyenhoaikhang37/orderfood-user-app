@@ -184,7 +184,8 @@
   margin-bottom: 10px;
 }
 .home-product-item {
-  display: block;
+  display: flex;
+  flex-shrink: 0;
   flex: 25%;
   position: relative;
   margin-top: 10px;
@@ -259,7 +260,8 @@
 
 .home-product-item__action {
   display: flex;
-  margin: 10px 10px 0;
+  margin-left: 10px;
+  margin-right: 10px;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 7px;

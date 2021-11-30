@@ -11,7 +11,7 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
         Danh sách địa chỉ quán
       </div>
 
-      {searchStoreList.length === 0 && (
+      {searchStoreList.length === 0 || searchStoreList.length === 16 ? (
         <div className="home-product">
           <div className="row sm-gutter">
             {/* Store Item */}
@@ -20,8 +20,7 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
             ))}
           </div>
         </div>
-      )}
-      {searchStoreList.length !== 0 && (
+      ) : (
         <div className="home-product">
           <div className="row sm-gutter">
             {/* Store Item */}
@@ -31,6 +30,7 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
           </div>
         </div>
       )}
+
       {nearStoreList.length !== 0 && (
         <div className="product-address">
           <i className="fas fa-map-marker-alt address-icon"></i>

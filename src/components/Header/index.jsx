@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import Images from 'constants/images';
@@ -19,6 +19,10 @@ const Header = () => {
     localStorage.removeItem('food_cart');
     window.location.reload();
   };
+
+  useEffect(() => {
+    dispatch(storeActions.searchStore(searchInput));
+  }, [searchInput]);
 
   const handleSearchButton = () => {
     dispatch(storeActions.searchStore(searchInput));

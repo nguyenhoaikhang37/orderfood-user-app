@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isError }) => {
   const user = useSelector(selectAuthUser);
   const [payment, setPayment] = useState();
-  console.log('🚀 ~ file: PopupCheckout.jsx ~ line 11 ~ PopupCheckout ~ payment', payment);
+  console.log("🚀 ~ file: PopupCheckout.jsx ~ line 11 ~ PopupCheckout ~ payment", payment)
   const [shipMoney, setShipMoney] = useState(0);
   const [shipList, setShipList] = useState([]);
 
@@ -129,7 +129,6 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
                   <label className="text-gray-900">{ship?.name}</label>
                 </div>
               ))}
-
               {/* <div className="flex items-center text-sm">
                 <Checkbox checked={payment === 1} onChange={() => setPayment(1)} />
                 <label className="text-gray-900">Giao hàng</label>
@@ -141,6 +140,13 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
             </div>
           </div>
           <div className="checkout-ship">
+           {payment === '618928d5af7088a9fc3f2602' && <div className="checkout-ship-info">
+              <p className="checkout-name checkout-title">Số coin hiện có: </p>
+              <p className="checkout-price">
+                {user?.myCoin} điểm ({(user?.myCoin * 1000).toLocaleString()} đ)
+              </p>
+            </div>}
+
             <div className="checkout-ship-info">
               <p className="checkout-name checkout-title">Phí giao hàng</p>
               <p className="checkout-price">

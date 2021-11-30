@@ -21,21 +21,20 @@ const Sidebar = memo(function Sidebar({ categoryList, activeCate, onChangeCate }
             className="fas fa-angle-right navigator-icon"
           ></i>
         </li>
-        {categoryList.map((category) => (
-          // li co className active
+        {categoryList?.map((category) => (
           <li
-            onClick={() => handleClick(category._id)}
-            key={category._id}
+            onClick={() => handleClick(category?._id)}
+            key={category?._id}
             className="navigator-item"
           >
             <a
-              style={activeCate === category._id ? { color: '#fd452b' } : {}}
+              style={activeCate === category?._id ? { color: '#fd452b' } : {}}
               className="navigator-link"
             >
-              {category.name}
+              {category?.name}
             </a>
             <i
-              style={activeCate === category._id ? { color: '#fd452b' } : {}}
+              style={activeCate === category?._id ? { color: '#fd452b' } : {}}
               className="fas fa-angle-right navigator-icon"
             ></i>
           </li>

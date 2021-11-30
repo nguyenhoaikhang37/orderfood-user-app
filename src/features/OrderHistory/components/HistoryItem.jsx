@@ -76,7 +76,7 @@ const HistoryItem = ({ history, index }) => {
                 color="secondary"
                 variant="outlined"
               >
-                Xoá đơn hàng <i class="fas fa-trash-alt"></i>
+                Huỷ đơn hàng <i class="fas fa-trash-alt"></i>
               </Button>
             </>
           ) : history?.status === 1 ? (
