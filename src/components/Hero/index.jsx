@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <div className="carousel relative container mx-auto" style={{ maxWidth: 1600 }}>
+    <div className="carousel relative container mx-auto" style={{ maxWidth: 2000 }}>
       <div className="carousel-inner relative overflow-hidden w-full">
         {/*Slide 1*/}
         <input
@@ -21,21 +21,7 @@ const Hero = () => {
               objectFit: 'cover',
               objectPosition: 'top',
             }}
-          >
-            <div className="container mx-auto">
-              <div className="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                <p className="text-white text-2xl my-4">
-                  Stripy Zig Zag Jigsaw Pillow and Duvet Set
-                </p>
-                <a
-                  className="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                  href="#"
-                >
-                  view product
-                </a>
-              </div>
-            </div>
-          </div>
+          ></div>
         </div>
         <label
           htmlFor="carousel-3"
@@ -69,19 +55,7 @@ const Hero = () => {
               objectFit: 'cover',
               objectPosition: 'top',
             }}
-          >
-            <div className="container mx-auto">
-              <div className="flex flex-col text-white w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                <p className="text-white text-2xl my-4">Real Bamboo Wall Clock</p>
-                <a
-                  className="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-white hover:border-black"
-                  href="#"
-                >
-                  view product
-                </a>
-              </div>
-            </div>
-          </div>
+          ></div>
         </div>
         <label
           htmlFor="carousel-1"
@@ -113,19 +87,7 @@ const Hero = () => {
               objectFit: 'cover',
               objectPosition: 'top',
             }}
-          >
-            <div className="container mx-auto">
-              <div className="flex flex-col text-white w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                <p className="text-white text-2xl my-4">Brown and blue hardbound book</p>
-                <a
-                  className="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-white hover:border-black"
-                  href="#"
-                >
-                  view product
-                </a>
-              </div>
-            </div>
-          </div>
+          ></div>
         </div>
         <label
           htmlFor="carousel-2"

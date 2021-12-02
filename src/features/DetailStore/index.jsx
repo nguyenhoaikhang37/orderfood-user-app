@@ -43,7 +43,7 @@ const DetailStore = () => {
     dispatch(fetchFoodByRes(idParams.id));
   }, []);
 
-  const handleCheckout = async ({ foodCart, totalCart, pay }) => {
+  const handleCheckout = async ({ foodCart, totalCart, pay, ship }) => {
     try {
       const checkoutCart = {
         arrayFood: foodCart
@@ -63,29 +63,39 @@ const DetailStore = () => {
           })),
         restaurant: storeById._id,
         pay,
-        ship: 10000,
-        total: totalCart,
+        ship,
+        total: totalCart + ship,
       };
-      console.log({ checkoutCart });
 
+      setIsError(false);
       setLoading(true);
       const { data } = await orderApi.checkout(checkoutCart);
       if (!data.success) {
-        Swal.fire({
-          icon: 'error',
-          title: `${data.message}`,
-        });
+        setIsError(true);
+        setLoading(false);
+
         return;
       }
-      if (data.success) {
+
+      // Thanh toán trực tiếp và coin
+      if (data.success && pay !== '61614a35855f83b83e611b82') {
         setLoading(false);
         Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
         history.push('/');
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
         setIsError(false);
       }
+
+      // Thanh toán qua ví
+      if (data.success && pay === '61614a35855f83b83e611b82') {
+        setLoading(false);
+        Swal.fire('Success!', 'Bạn đã được chuyển qua trang thanh toán bằng momo.', 'success');
+        history.push('/');
+        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
+        setIsError(false);
+        window.open(data.uri);
+      }
     } catch (error) {
-      setIsError(true);
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
     setLoading(false);
