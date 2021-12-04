@@ -20,7 +20,6 @@ const Store = () => {
   const loadingStore = useSelector(selectStoreLoading);
   const categoryList = useSelector(selectStoreCategoryList);
   const storeList = useSelector(selectStoreList);
-  console.log('🚀 ~ file: index.jsx ~ line 23 ~ Store ~ storeList', storeList);
   const nearStoreList = useSelector(selectNearStoreList);
   const searchStoreList = useSelector(selectSearchStoreList);
 

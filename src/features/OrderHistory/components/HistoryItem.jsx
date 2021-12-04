@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 moment.locale('vi');
 
 const HistoryItem = ({ history, index }) => {
+  console.log('🚀 ~ file: HistoryItem.jsx ~ line 12 ~ HistoryItem ~ history', history);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,8 +55,7 @@ const HistoryItem = ({ history, index }) => {
         </td>
         <td className="px-6 py-4 whitespace-no-wrap border-b text-gray-900 border-gray-500 text-sm leading-5">
           <div className="font-bold">{history?.restaurant?.name}</div>
-          {history?.restaurant?.location.street}, {history?.restaurant?.location.ward},{' '}
-          {history?.restaurant?.location.district},{history?.restaurant?.location.city}.
+          {history?.restaurant?.location}
         </td>
         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-green-700 text-sm leading-5">
           {(history?.total + history?.ship).toLocaleString()} đ

@@ -93,7 +93,7 @@ const DetailStore = () => {
         history.push('/');
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
         setIsError(false);
-        window.open(data.uri);
+        window.open(data.uri, '_self');
       }
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
