@@ -62,7 +62,7 @@ const HistoryItem = ({ history, index }) => {
         </td>
         <td className="px-3 py-4 whitespace-no-wrap border-b text-gray-900 border-gray-500 text-xs leading-5">
           {history?.status === 0 ? (
-            <>
+            <div className="flex flex-col space-y-4 items-center">
               <span className="text-center relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight">
                 <span
                   aria-hidden
@@ -78,7 +78,7 @@ const HistoryItem = ({ history, index }) => {
               >
                 Huỷ đơn hàng <i class="fas fa-trash-alt"></i>
               </Button>
-            </>
+            </div>
           ) : history?.status === 1 ? (
             <span className="relative inline-block px-3 py-1 font-semibold text-indigo-900 leading-tight">
               <span

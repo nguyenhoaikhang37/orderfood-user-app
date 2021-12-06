@@ -1,7 +1,9 @@
+import LoadingPage from 'components/Loading/LoadingPage';
 import NotFound from 'components/NotFound';
 import { ACCESS_TOKEN } from 'constants/global';
 import Auth from 'features/Auth';
 import { getUserToken, selectAuthUser } from 'features/Auth/authSlice';
+import Profile from 'features/Profile';
 import {
   fetchCategoryList,
   fetchMenuList,
@@ -38,11 +40,12 @@ function App() {
 
   return (
     <Router history={history}>
-      <Suspense fallback={<div>...Loading</div>}>
+      <Suspense fallback={<LoadingPage />}>
         <Switch>
           <HomeLayout exact path="/" Component={Store} />
           <HomeLayout exact path="/detail/:id" Component={DetailStore} />
           <HomeLayout exact path="/order-history" Component={OrderHistory} />
+          <HomeLayout exact path="/profile" Component={Profile} />
 
           <Route path="/auth">
             <Auth />

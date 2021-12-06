@@ -1,9 +1,8 @@
 import ButtonCart from 'components/ButtonCart';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
-import { ACCESS_TOKEN } from 'constants/global';
 import React, { Fragment } from 'react';
-import { Redirect, Route } from 'react-router';
+import { Route } from 'react-router';
 
 const HomeLayout = ({ Component, ...restProps }) => {
   // const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));

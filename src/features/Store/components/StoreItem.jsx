@@ -15,13 +15,10 @@ const StoreItem = memo(function StoreItem({ store }) {
         <div className="home-product-item__secon">{store?.location}</div>
         <div className="home-product-item__action mt-auto">
           <div className="home-product-item__rating">
+            {store?.rating}
             <i className="home-product-item__star--gold fas fa-star" />
-            <i className="home-product-item__star--gold fas fa-star" />
-            <i className="home-product-item__star--gold fas fa-star" />
-            <i className="home-product-item__star--gold fas fa-star" />
-            <i className="fas fa-star" />
           </div>
-          <span className="home-product-item__sold">10 đã bán</span>
+          <span className="home-product-item__sold">{store?.duration}</span>
         </div>
         <div className="product-favourite">
           <i className="fas fa-check" />

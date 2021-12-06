@@ -285,12 +285,13 @@ i.home-product-item__like-icon-fill {
 }
 
 .home-product-item__rating {
-  font-size: 0.5rem;
-  color: #d5d5d5;
+  font-size: 0.7rem;
+  color: #999;
 }
 
 .home-product-item__star--gold {
   color: var(--star-gold-color);
+  margin-left: 3px;
 }
 
 .home-product-item__sold {

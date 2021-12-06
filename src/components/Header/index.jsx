@@ -69,6 +69,12 @@ const Header = () => {
                 <div className="header__cart-list">
                   <ul className="signout-list">
                     <li>
+                      <Link to="/profile" className="signout-item">
+                        <i className="fas fa-user signout-icon"></i>
+                        Cập nhật tài khoàn
+                      </Link>
+                    </li>
+                    <li>
                       <Link to="/order-history" className="signout-item">
                         <i className="fas fa-history signout-icon"></i>
                         Lịch sử đơn hàng
@@ -78,10 +84,7 @@ const Header = () => {
                       <i className="fas fa-ticket-alt signout-icon"></i>
                       Ví voucher
                     </li>
-                    <li className="signout-item">
-                      <i className="fas fa-user signout-icon"></i>
-                      Cập nhật tài khoàn
-                    </li>
+
                     <li onClick={handleSignOut} className="signout-item">
                       <i className="fas fa-sign-out-alt signout-icon"></i>
                       Đăng xuất
