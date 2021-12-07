@@ -1,14 +1,27 @@
+import { ACCESS_TOKEN } from 'constants/global';
 import axiosClient from './axiosClient';
+const token = localStorage.getItem(ACCESS_TOKEN);
 
 const userApi = {
-  layThongTinTaiKhoan(token) {
+  layThongTinTaiKhoan(token1) {
     const url = `/auth/profile`;
     return axiosClient({
       url,
       method: 'GET',
       headers: {
+        Authorization: 'Bearer ' + token1,
+      },
+    });
+  },
+  doiThongTinTaiKhoan(formValues) {
+    const url = `/auth`;
+    return axiosClient({
+      url,
+      method: 'PUT',
+      headers: {
         Authorization: 'Bearer ' + token,
       },
+      data: formValues,
     });
   },
   dangNhap(formValues) {

@@ -1,11 +1,6 @@
 import { ACCESS_TOKEN } from 'constants/global';
-import { selectAuthUser } from 'features/Auth/authSlice';
-import { useSelector } from 'react-redux';
 
-const Sidebar = () => {
-  const user = useSelector(selectAuthUser);
-  console.log('🚀 ~ file: Sidebar.jsx ~ line 6 ~ Sidebar ~ user', user);
-
+const Sidebar = ({ user }) => {
   const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.removeItem('food_cart');
@@ -19,7 +14,7 @@ const Sidebar = () => {
           alt
           className="w-12 h-12 rounded-full bg-coolGray-500"
         />
-        <div className="flex-shrink-0">
+        <div style={{ minWidth: 200 }}>
           <h2 className="text-lg font-semibold">{user?.profile?.fullName}</h2>
           <span className="flex items-center space-x-1">
             <a href="#" className="text-xs hover:underline text-coolGray-600">
@@ -36,7 +31,10 @@ const Sidebar = () => {
                 <i class="fas fa-coins"></i>
               </span>
               <span>
-                Điểm: <strong>{user?.myCoin}</strong>
+                Điểm:{' '}
+                <strong>
+                  {user?.myCoin} ({(user?.myCoin * 1000).toLocaleString()}đ)
+                </strong>
               </span>
             </a>
           </li>

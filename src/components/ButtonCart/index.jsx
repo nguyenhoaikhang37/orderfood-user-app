@@ -5,7 +5,6 @@ import './ButtonCart.scss';
 
 const ButtonCart = () => {
   const foodCartList = useSelector(selectDetailFoodCart);
-  console.log('🚀 ~ file: index.jsx ~ line 8 ~ ButtonCart ~ foodCartList', foodCartList);
 
   return (
     <div className="fixed bottom-0 right-0">

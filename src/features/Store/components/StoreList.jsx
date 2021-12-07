@@ -7,6 +7,22 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
   console.log('🚀 ~ file: StoreList.jsx ~ line 7 ~ StoreList ~ storeList', storeList);
   return (
     <Fragment>
+      {nearStoreList.length !== 0 && (
+        <div className="product-address">
+          <i className="fas fa-map-marker-alt address-icon"></i>
+          Quán gần tôi
+        </div>
+      )}
+
+      <div className="home-product">
+        <div className="row sm-gutter">
+          {/* Store Item */}
+          {nearStoreList?.map((store) => (
+            <StoreItem key={store._id} store={store} />
+          ))}
+        </div>
+      </div>
+
       <div className="product-address">
         <i className="fas fa-map-marker-alt address-icon"></i>
         Danh sách địa chỉ quán
@@ -31,22 +47,6 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
           </div>
         </div>
       )}
-
-      {nearStoreList.length !== 0 && (
-        <div className="product-address">
-          <i className="fas fa-map-marker-alt address-icon"></i>
-          Quán gần tôi
-        </div>
-      )}
-
-      <div className="home-product">
-        <div className="row sm-gutter">
-          {/* Store Item */}
-          {nearStoreList?.map((store) => (
-            <StoreItem key={store._id} store={store} />
-          ))}
-        </div>
-      </div>
     </Fragment>
   );
 });
