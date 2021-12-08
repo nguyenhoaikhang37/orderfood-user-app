@@ -15,11 +15,9 @@ const Profile = () => {
   }
 
   const handleUpdateProfile = async ({ formValues, addressUpdate }) => {
-    const { phoneNumber, fullName, address, password, oldPassword } = formValues;
+    const { phoneNumber, fullName, address } = formValues;
     const formatRequest = {
       phoneNumber,
-      oldPassword,
-      password,
       profile: {
         fullName,
         address: addressUpdate ? addressUpdate.name : address,

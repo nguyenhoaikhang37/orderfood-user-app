@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import StoreItem from './StoreItem';
 
 const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStoreList }) {
-  console.log('🚀 ~ file: StoreList.jsx ~ line 7 ~ StoreList ~ storeList', storeList);
   return (
     <Fragment>
       {nearStoreList.length !== 0 && (

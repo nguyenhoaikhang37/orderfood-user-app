@@ -89,7 +89,7 @@ const DetailStore = () => {
       // Thanh toán qua ví
       if (data.success && pay === '61614a35855f83b83e611b82') {
         setLoading(false);
-        Swal.fire('Success!', 'Bạn đã được chuyển qua trang thanh toán bằng momo.', 'success');
+        Swal.fire('Success!', 'Chúc mừng bạn tích được 1 điểm thưởng (1 điểm = 1.000đ)', 'success');
         history.push('/');
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
         setIsError(false);

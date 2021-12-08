@@ -18,7 +18,7 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('Mật khẩu không được bỏ trống!')
-    .min(6, 'Mật khẩu chứa ít nhất 6 kí tự!')
+    // .min(6, 'Mật khẩu chứa ít nhất 6 kí tự!')
     .max(20, 'Mật khẩu chứa nhiều nhất 20 kí tự!'),
 });
 

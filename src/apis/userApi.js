@@ -17,7 +17,18 @@ const userApi = {
     const url = `/auth`;
     return axiosClient({
       url,
-      method: 'PUT',
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      data: formValues,
+    });
+  },
+  doiMatKhau(formValues) {
+    const url = `/auth/password`;
+    return axiosClient({
+      url,
+      method: 'PATCH',
       headers: {
         Authorization: 'Bearer ' + token,
       },
