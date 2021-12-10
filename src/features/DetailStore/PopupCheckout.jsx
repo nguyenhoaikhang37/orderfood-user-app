@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isError }) => {
+  console.log('🚀 ~ file: PopupCheckout.jsx ~ line 9 ~ PopupCheckout ~ foodCart', foodCart);
   const user = useSelector(selectAuthUser);
   const [payment, setPayment] = useState();
   const [shipMoney, setShipMoney] = useState(0);
@@ -45,6 +46,9 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
       totalCart: foodCart
         ?.filter((food) => food.restaurant === idParams.id)
         ?.reduce((total, cur) => total + cur.totalFood, 0),
+      totalCost: foodCart
+        ?.filter((food) => food.restaurant === idParams.id)
+        ?.reduce((total, cur) => total + cur.total, 0),
       pay: payment,
       ship: getShipMoney(shipMoney),
     });
@@ -69,7 +73,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               height="350"
               width="100%"
               loading="lazy"
-              src={`https://maps.google.com/maps?q=${storeById.lat},${storeById.lng}&hl=es&z=14&output=embed`}
+              src={`https://maps.google.com/maps?q=${storeById?.lat},${storeById?.lng}&hl=es&z=14&output=embed`}
             ></iframe>
           </div>
           <div className=" text-sm mt-2">
@@ -103,7 +107,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
                     <span className="order-item-number">{food?.quantityInCart}</span> {food?.name}{' '}
                   </p>
                   <p className="text-base font-semibold">
-                    {(food?.price * food?.quantityInCart).toLocaleString()}
+                    {(food?.totalFood).toLocaleString()}
                     <span
                       style={{
                         fontWeight: '400',

@@ -1,41 +1,47 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import foodApi from 'apis/foodApi';
 import FoodItem from './FoodItem';
 import ComboItem from './ComboItem';
 import LoadingFood from 'components/Loading/LoadingFood';
-import { useQuery } from 'react-query';
-
-const fetchFoodByMenu = async (id) => {
-  const res = await foodApi.getFoodByMenu(id);
-  return res.data;
-};
 
 const MenuFood = memo(function MenuFood({ menu }) {
-  const { data, status } = useQuery(`${menu._id}`, () => fetchFoodByMenu(menu._id));
+  const [foodList, setFoodList] = useState([]);
+  const [comboList, setComboList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  if (status === 'loading') {
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const res = await foodApi.getFoodByMenu(menu._id);
+      setFoodList(res.data.menu[0].listFood);
+      setComboList(res.data.menu[0].listCombo);
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) {
     return <LoadingFood />;
   }
 
   return (
     <div>
-      {data.menu[0].listCombo?.length !== 0 && (
+      {comboList?.length !== 0 && (
         <div id={menu._id} className="food-menu-text">
           {menu.name}
         </div>
       )}
-      {data.menu[0].listFood?.length !== 0 && (
+      {foodList?.length !== 0 && (
         <div id={menu._id} className="food-menu-text">
           {menu.name}
         </div>
       )}
 
       <div className="food-list">
-        {data.menu[0].listCombo?.map((combo) => (
+        {comboList?.map((combo) => (
           <ComboItem key={combo._id} combo={combo} />
         ))}
-        {data.menu[0].listFood?.map((food) => (
+        {foodList?.map((food) => (
           <FoodItem key={food._id} food={food} />
         ))}
       </div>

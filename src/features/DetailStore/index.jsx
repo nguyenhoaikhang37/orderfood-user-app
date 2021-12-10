@@ -43,7 +43,7 @@ const DetailStore = () => {
     dispatch(fetchFoodByRes(idParams.id));
   }, []);
 
-  const handleCheckout = async ({ foodCart, totalCart, pay, ship }) => {
+  const handleCheckout = async ({ foodCart, totalCart, totalCost, pay, ship }) => {
     try {
       const checkoutCart = {
         arrayFood: foodCart
@@ -64,9 +64,9 @@ const DetailStore = () => {
         restaurant: storeById._id,
         pay,
         ship,
+        totalCost: totalCost + ship,
         total: totalCart + ship,
       };
-
       setIsError(false);
       setLoading(true);
       const { data } = await orderApi.checkout(checkoutCart);
