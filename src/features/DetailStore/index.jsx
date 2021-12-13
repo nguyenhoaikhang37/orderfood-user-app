@@ -82,19 +82,17 @@ const DetailStore = () => {
         setLoading(false);
         Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
         history.push('/');
-        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
         setIsError(false);
       }
 
       // Thanh toán qua ví
       if (data.success && pay === '61614a35855f83b83e611b82') {
         setLoading(false);
-        Swal.fire('Success!', 'Chúc mừng bạn tích được 1 điểm thưởng (1 điểm = 1.000đ)', 'success');
         history.push('/');
-        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
         setIsError(false);
         window.open(data.uri, '_self');
       }
+      dispatch(detailActions.deleteFoodCartByRes(idParams.id));
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }

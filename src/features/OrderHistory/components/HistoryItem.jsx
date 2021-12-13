@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 moment.locale('vi');
 
 const HistoryItem = ({ history, index }) => {
-  console.log('🚀 ~ file: HistoryItem.jsx ~ line 12 ~ HistoryItem ~ history', history);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

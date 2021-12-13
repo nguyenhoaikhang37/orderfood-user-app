@@ -43,6 +43,10 @@ const userApi = {
     const url = `/auth/register`;
     return axiosClient.post(url, formValues);
   },
+  xacThucOTP(otp, token1) {
+    const url = `/auth/verify?token=${token1}&code=${otp}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default userApi;

@@ -4,12 +4,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import SignUpForm from 'features/Auth/components/SignUpForm';
 import React, { Fragment, useState } from 'react';
 import userApi from 'apis/userApi';
-import Swal from 'sweetalert2';
-import { useHistory } from 'react-router';
+import Popup from 'components/Popup';
+import PopupOTP from './PopupOTP';
 
 const SignUp = ({ classes }) => {
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const [tokenOtp, setTokenOtp] = useState('');
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleSubmitForm = async ({ formValues, address }) => {
     const formatFormValues = {
@@ -23,15 +27,15 @@ const SignUp = ({ classes }) => {
     };
 
     try {
-      console.log(formatFormValues);
       setLoading(true);
-      await userApi.dangKy(formatFormValues);
-      setLoading(true);
-      Swal.fire('Success!', 'Bạn đã đăng kí thành công.', 'success');
-      history.push('/auth/signin');
+      const res = await userApi.dangKy(formatFormValues);
+      setTokenOtp(res.data.token);
+      console.log('otp', res);
+      handleOpen();
     } catch (error) {
       console.log('Failed to sign up form submit', error);
     }
+    setLoading(false);
   };
 
   return (
@@ -40,9 +44,12 @@ const SignUp = ({ classes }) => {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign up
+        Đăng ký
       </Typography>
       <SignUpForm onSubmit={handleSubmitForm} classes={classes} loading={loading} />
+      <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
+        <PopupOTP handleClose={handleClose} tokenOtp={tokenOtp} />
+      </Popup>
     </Fragment>
   );
 };

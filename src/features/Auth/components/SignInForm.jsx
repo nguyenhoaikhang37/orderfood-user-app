@@ -40,10 +40,6 @@ const SignInForm = ({ classes, loading, onSubmit }) => {
       <form onSubmit={handleSubmit(handleFormSubmit)} className={classes.form}>
         <InputField name="phoneNumber" control={control} label="Số điện thoại" />
         <InputField name="password" type="password" control={control} label="Mật khẩu" />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
         <Button
           type="submit"
           fullWidth
@@ -53,7 +49,7 @@ const SignInForm = ({ classes, loading, onSubmit }) => {
           disabled={isSubmitting}
         >
           {isSubmitting && <CircularProgress size="1rem" color="inherit" />}
-          Sign In
+          Đăng nhập
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>

@@ -100,7 +100,7 @@ const HistoryPopup = ({ history }) => {
         </div>
         <div className="text-base mr-8 mt-2 text-right ">
           <span className="text-red-500 font-bold">Tổng cộng:</span>{' '}
-          {(history?.total + history?.ship).toLocaleString()} đ
+          {(history?.total).toLocaleString()} đ
         </div>
       </div>
     </div>

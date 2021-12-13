@@ -163,7 +163,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               </p>
             </div>
 
-            <div className="checkout-ship-info checkout-promotion mb-1">
+            {/* <div className="checkout-ship-info checkout-promotion mb-1">
               <div className="checkout-name checkout-title">
                 <p>Mã khuyến mãi</p>
                 <p className="checkout-secon">(Thêm mã khuyến mãi)</p>
@@ -172,7 +172,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
                 <input type="text" className="border border-gray-300 w-16 mr-2" />
                 <i className="fas fa-plus-circle checkout-ship-icon"></i>
               </div>
-            </div>
+            </div> */}
             {isError && <Alert severity="error">Số coin trong ví hiện không đủ!</Alert>}
           </div>
         </div>

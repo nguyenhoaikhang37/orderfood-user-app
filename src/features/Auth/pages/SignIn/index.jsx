@@ -34,7 +34,7 @@ const SignIn = ({ classes }) => {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Đăng nhập
       </Typography>
       <SignInForm classes={classes} loading={loading} onSubmit={handleSignInFormSubmit} />
       {errorLogin && <Alert severity="error">{errorLogin}</Alert>}

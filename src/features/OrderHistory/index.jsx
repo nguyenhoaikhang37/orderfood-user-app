@@ -1,11 +1,14 @@
 import orderApi from 'apis/orderApi';
+import { ACCESS_TOKEN } from 'constants/global';
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import HistoryTable from './components/HistoryTable';
 
 const OrderHistory = () => {
   const [historyList, setHistoryList] = useState([]);
   const [isActive, setIsActive] = useState(0);
   const [loading, setLoading] = useState(false);
+  const isLogin = Boolean(localStorage.getItem(ACCESS_TOKEN));
 
   useEffect(() => {
     (async () => {
@@ -39,6 +42,10 @@ const OrderHistory = () => {
     setLoading(false);
     setHistoryList(res.data.order);
   };
+
+  if (!isLogin) {
+    return <Redirect to="/auth/signin" />;
+  }
 
   return (
     <div className="my-20 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">

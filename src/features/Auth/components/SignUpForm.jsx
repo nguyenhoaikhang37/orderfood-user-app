@@ -119,7 +119,7 @@ const SignUpForm = ({ classes, onSubmit, loading }) => {
           className={classes.submit}
         >
           {loading && <CircularProgress size="1rem" color="inherit" />}
-          Sign Up
+          Đăng ký
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>
