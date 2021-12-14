@@ -5,10 +5,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { InputField } from 'components/FormFields/InputField';
+import Popup from 'components/Popup';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
+import PopupForgetPW from './PopupForgetPW';
 
 const schema = yup.object().shape({
   phoneNumber: yup
@@ -30,6 +32,9 @@ const SignInForm = ({ classes, loading, onSubmit }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleFormSubmit = (formValues) => {
     onSubmit(formValues);
@@ -51,14 +56,22 @@ const SignInForm = ({ classes, loading, onSubmit }) => {
           {isSubmitting && <CircularProgress size="1rem" color="inherit" />}
           Đăng nhập
         </Button>
-        <Grid container justifyContent="flex-end">
+        <Grid container justifyContent="space-between">
+          <Grid item>
+            <div onClick={handleOpen} className="hover:text-indigo-600 cursor-pointer">
+              Quên mật khẩu?
+            </div>
+          </Grid>
           <Grid item>
             <Link to="/auth/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
+              <div className="hover:text-indigo-600">Bạn chưa có tài khoản? Đăng ký</div>
             </Link>
           </Grid>
         </Grid>
       </form>
+      <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
+        <PopupForgetPW handleCloseSignInForm={handleClose} />
+      </Popup>
     </Fragment>
   );
 };

@@ -50,7 +50,7 @@ const SignUpForm = ({ classes, onSubmit, loading }) => {
       }
     })();
   }, []);
-  console.log(inputt);
+
   useEffect(() => {
     setWardSelect(
       districtList?.filter((district) => district.codename == ward).map((x) => x.wards)
@@ -124,7 +124,7 @@ const SignUpForm = ({ classes, onSubmit, loading }) => {
         <Grid container justifyContent="flex-end">
           <Grid item>
             <Link to="/auth/signin" variant="body2">
-              Already have an account? Sign in
+              <div className="hover:text-indigo-600">Bạn đã có tài khoản? Đăng nhập</div>
             </Link>
           </Grid>
         </Grid>

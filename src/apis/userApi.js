@@ -47,6 +47,18 @@ const userApi = {
     const url = `/auth/verify?token=${token1}&code=${otp}`;
     return axiosClient.get(url);
   },
+  quenMatKhau(formValues) {
+    const url = `/auth/forgot-password`;
+    return axiosClient({
+      url,
+      method: 'POST',
+      data: formValues,
+    });
+  },
+  xacThucQuenMatKhau(otp, token1) {
+    const url = `/auth/verify-newPassword?token=${token1}&code=${otp}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default userApi;

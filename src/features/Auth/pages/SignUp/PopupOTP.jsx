@@ -12,8 +12,7 @@ const schema = yup.object().shape({
   otp: yup.string().required('Bạn vui lòng nhập mã OTP!'),
 });
 
-const PopupOTP = ({ handleClose, tokenOtp }) => {
-  console.log('🚀 ~ file: PopupOTP.jsx ~ line 16 ~ PopupOTP ~ tokenOtp', tokenOtp);
+const PopupOTP = ({ handleClose, tokenOtp, isForgetPW, handleCloseSignInForm }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -43,9 +42,15 @@ const PopupOTP = ({ handleClose, tokenOtp }) => {
     try {
       setError('');
       setLoading(true);
-      const res = await userApi.xacThucOTP(formValues.otp, tokenOtp);
-      console.log('🚀 ~ file: PopupOTP.jsx ~ line 23 ~ handleOTPSubmit ~ res', res);
-      Swal.fire('Success!', 'Bạn đã đăng kí thành công.', 'success');
+      if (!isForgetPW) {
+        await userApi.xacThucOTP(formValues.otp, tokenOtp);
+        Swal.fire('Success!', 'Bạn đã đăng kí thành công.', 'success');
+      } else if (isForgetPW) {
+        await userApi.xacThucQuenMatKhau(formValues.otp, tokenOtp);
+        Swal.fire('Success!', 'Bạn đã Lấy lại mật khẩu thành công.', 'success');
+        handleClose();
+        handleCloseSignInForm();
+      }
       history.push('/auth/signin');
     } catch (error) {
       setError('Mã OTP không hợp lệ');
@@ -57,7 +62,7 @@ const PopupOTP = ({ handleClose, tokenOtp }) => {
   return (
     <Fragment>
       <div className="mb-6 text-3xl font-light text-center text-indigo-800 dark:text-white">
-        Nhập mã xác thực <i class="fas fa-fingerprint"></i>
+        Nhập mã xác thực <i className="fas fa-fingerprint"></i>
       </div>
       <Box component="form" onSubmit={handleSubmit(handleOTPSubmit)} noValidate sx={{ mt: 1 }}>
         <InputField name="otp" control={control} label="Mã OTP" />

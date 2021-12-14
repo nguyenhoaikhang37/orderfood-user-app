@@ -57,7 +57,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
   return (
     <div className="relative pb-4">
       <h3 className="mb-3 text-2xl text-gray-700 flex items-center justify-center">
-        Xác nhận đơn hàng <i style={{ color: '#ee4d2d' }} class="far fa-check-circle ml-2"></i>
+        Xác nhận đơn hàng <i style={{ color: '#ee4d2d' }} className="far fa-check-circle ml-2"></i>
       </h3>
       <div className="flex space-x-4">
         <div className="w-6/12">
@@ -78,14 +78,14 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
           </div>
           <div className=" text-sm mt-2">
             <p className="font-semibold">
-              <i class="fas fa-circle text-red-500 mr-1"></i>
+              <i className="fas fa-circle text-red-500 mr-1"></i>
               {storeById?.name} - {storeById?.phoneNumber}{' '}
             </p>
             <p>{storeById?.location}</p>
           </div>
           <div className=" text-sm mt-2">
             <p className="font-semibold">
-              <i class="fas fa-circle text-green-500 mr-1"></i>
+              <i className="fas fa-circle text-green-500 mr-1"></i>
               {user?.profile?.fullName} - {user?.phoneNumber}{' '}
             </p>
             <p>{user?.profile?.address}</p>
@@ -185,7 +185,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
         <span></span>
         <span className="flex items-center">
           {loading && <CircularProgress size="1rem" color="inherit" />} Đặt hàng{' '}
-          <i class="fas fa-arrow-right ml-2"></i>
+          <i className="fas fa-arrow-right ml-2"></i>
         </span>
         <span>
           {(

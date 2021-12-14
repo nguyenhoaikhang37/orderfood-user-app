@@ -28,7 +28,7 @@ const Sidebar = ({ user }) => {
           <li className="bg-coolGray-100 text-coolGray-900">
             <a href="#" className="flex items-center p-2 space-x-3 rounded-md">
               <span className="text-yellow-600 text-xl">
-                <i class="fas fa-coins"></i>
+                <i className="fas fa-coins"></i>
               </span>
               <span>
                 Điểm:{' '}
