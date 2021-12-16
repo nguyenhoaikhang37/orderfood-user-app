@@ -66,7 +66,7 @@ const userApi = {
       headers: {
         Authorization: 'Bearer ' + token,
       },
-      method: 'PATCH',
+      method: 'PUT',
       data: formValues,
     });
   },
