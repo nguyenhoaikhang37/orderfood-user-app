@@ -1,16 +1,20 @@
 import { Alert, Checkbox, CircularProgress } from '@mui/material';
 import axios from 'axios';
+import Popup from 'components/Popup';
 import { selectAuthUser } from 'features/Auth/authSlice';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import PopupChangeAddress from './PopupChangeAddress';
 
 const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isError }) => {
-  console.log('🚀 ~ file: PopupCheckout.jsx ~ line 9 ~ PopupCheckout ~ foodCart', foodCart);
   const user = useSelector(selectAuthUser);
   const [payment, setPayment] = useState();
   const [shipMoney, setShipMoney] = useState(0);
   const [shipList, setShipList] = useState([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     (async () => {
@@ -62,12 +66,6 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
       <div className="flex space-x-4">
         <div className="w-6/12">
           <div className="w-full" style={{ height: '350px' }}>
-            {/* <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.9003686095166!2d106.6266680143946!3d10.806520061593472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBUaOG7sWMgcGjhuqltIFRQLkhDTQ!5e1!3m2!1svi!2s!4v1636722326189!5m2!1svi!2s"
-              height="350"
-              width="100%"
-              loading="lazy"
-            ></iframe> */}
             {/* Lấy map từ lat lng */}
             <iframe
               height="350"
@@ -81,18 +79,30 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               <i className="fas fa-circle text-red-500 mr-1"></i>
               {storeById?.name} - {storeById?.phoneNumber}{' '}
             </p>
-            <p>{storeById?.location}</p>
+            <p>{storeById?.location}a</p>
           </div>
-          <div className=" text-sm mt-2">
-            <p className="font-semibold">
-              <i className="fas fa-circle text-green-500 mr-1"></i>
-              {user?.profile?.fullName} - {user?.phoneNumber}{' '}
+          {!user?.profile && (
+            <div className="my-4">
+              <CircularProgress size="1rem" color="primary" />
+            </div>
+          )}
+          {user?.profile && (
+            <div className=" text-sm mt-2">
+              <p className="font-semibold">
+                <i className="fas fa-circle text-green-500 mr-1"></i>
+                {user?.profile?.fullName} - {user?.phoneNumber}{' '}
+              </p>
+              <p>{user?.profile?.address}</p>
+            </div>
+          )}
+          <div className=" text-base mt-2 mb-4 flex items-center">
+            <p onClick={handleOpen} className="text-blue-500 hover:text-blue-700 cursor-pointer">
+              Thay đổi địa chỉ nhận hàng <i className="ml-2 fas fa-chevron-right"></i>
             </p>
-            <p>{user?.profile?.address}</p>
           </div>
         </div>
         <div className="w-6/12">
-          <div style={{ height: '250px' }} className="overflow-y-scroll pr-2 popup-checkout-scroll">
+          <div style={{ height: '320px' }} className="overflow-y-scroll pr-2 popup-checkout-scroll">
             <p className="text-center mb-2" style={{ color: '#ee4d2d' }}>
               Chi tiết đơn hàng
             </p>
@@ -136,14 +146,6 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
                   <label className="text-gray-900">{ship?.name}</label>
                 </div>
               ))}
-              {/* <div className="flex items-center text-sm">
-                <Checkbox checked={payment === 1} onChange={() => setPayment(1)} />
-                <label className="text-gray-900">Giao hàng</label>
-              </div>
-              <div className="flex items-center text-sm">
-                <Checkbox checked={payment === 2} onChange={() => setPayment(2)} />
-                <label className="text-gray-900">Thanh toán qua thẻ</label>
-              </div> */}
             </div>
           </div>
           <div className="checkout-ship">
@@ -163,16 +165,6 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               </p>
             </div>
 
-            {/* <div className="checkout-ship-info checkout-promotion mb-1">
-              <div className="checkout-name checkout-title">
-                <p>Mã khuyến mãi</p>
-                <p className="checkout-secon">(Thêm mã khuyến mãi)</p>
-              </div>
-              <div className="checkout-price icon-ship">
-                <input type="text" className="border border-gray-300 w-16 mr-2" />
-                <i className="fas fa-plus-circle checkout-ship-icon"></i>
-              </div>
-            </div> */}
             {isError && <Alert severity="error">Số coin trong ví hiện không đủ!</Alert>}
           </div>
         </div>
@@ -196,6 +188,9 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
           đ
         </span>
       </button>
+      <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
+        <PopupChangeAddress handleClose={handleClose} />
+      </Popup>
     </div>
   );
 };

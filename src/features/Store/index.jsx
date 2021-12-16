@@ -1,4 +1,5 @@
 import { LinearProgress } from '@mui/material';
+import storeApi from 'apis/storeApi';
 import axios from 'axios';
 import Hero from 'components/Hero';
 import ListStep from 'components/ListStep';
@@ -25,10 +26,18 @@ const Store = () => {
 
   const [filterStore, setFilterStore] = useState();
   const [activeCate, setActiveCate] = useState('all');
+  const [discountStoreList, setDiscountStoreList] = useState([]);
 
   useEffect(() => {
     if (activeCate === 'all') setFilterStore(storeList);
   }, [activeCate, storeList]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await storeApi.getDiscountStoreList();
+      setDiscountStoreList(res.data.discount.filter((x) => x));
+    })();
+  }, []);
 
   const handleChangeCategory = async (id) => {
     try {
@@ -65,6 +74,7 @@ const Store = () => {
                 storeList={filterStore}
                 nearStoreList={nearStoreList}
                 searchStoreList={searchStoreList}
+                discountStoreList={discountStoreList}
               />
             )}
           </div>

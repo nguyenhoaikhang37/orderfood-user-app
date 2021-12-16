@@ -59,6 +59,17 @@ const userApi = {
     const url = `/auth/verify-newPassword?token=${token1}&code=${otp}`;
     return axiosClient.get(url);
   },
+  doiDiaChi(formValues) {
+    const url = `/auth/changeAddress`;
+    return axiosClient({
+      url,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      method: 'PATCH',
+      data: formValues,
+    });
+  },
 };
 
 export default userApi;

@@ -30,7 +30,6 @@ const SignUp = ({ classes }) => {
       setLoading(true);
       const res = await userApi.dangKy(formatFormValues);
       setTokenOtp(res.data.token);
-      console.log('otp', res);
       handleOpen();
     } catch (error) {
       console.log('Failed to sign up form submit', error);

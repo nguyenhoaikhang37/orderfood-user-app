@@ -2,8 +2,14 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import StoreItem from './StoreItem';
+import DiscountStoreItem from './DiscountStoreItem';
 
-const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStoreList }) {
+const StoreList = memo(function StoreList({
+  storeList,
+  nearStoreList,
+  searchStoreList,
+  discountStoreList,
+}) {
   return (
     <Fragment>
       {nearStoreList.length !== 0 && (
@@ -43,6 +49,23 @@ const StoreList = memo(function StoreList({ storeList, nearStoreList, searchStor
             {searchStoreList?.map((store) => (
               <StoreItem key={store._id} store={store} />
             ))}
+          </div>
+        </div>
+      )}
+
+      {discountStoreList.length !== 0 && (
+        <div>
+          <div className="product-address mb-6">
+            <i className="fas fa-tags address-icon"></i>
+            Danh sách cửa hàng khuyến mãi
+          </div>
+          <div className="home-product">
+            <div className="flex space-x-4">
+              {/* Store Item */}
+              {discountStoreList.map((store) => (
+                <DiscountStoreItem key={store._id} store={store} />
+              ))}
+            </div>
           </div>
         </div>
       )}

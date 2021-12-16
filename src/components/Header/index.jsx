@@ -62,7 +62,7 @@ const Header = () => {
               <div className="header-cur">
                 <div className="header-avt">
                   <Avatar sx={{ width: 30, height: 30 }}>
-                    {user?.profile?.fullName.slice(0, 1)}
+                    {user?.profile?.fullName?.slice(0, 1)}
                   </Avatar>
                   <p>{user?.profile?.fullName}</p>
                 </div>
