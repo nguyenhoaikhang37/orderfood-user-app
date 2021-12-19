@@ -165,7 +165,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               </p>
             </div>
 
-            {isError && <Alert severity="error">Số coin trong ví hiện không đủ!</Alert>}
+            {isError && <Alert severity="error">{isError}</Alert>}
           </div>
         </div>
       </div>

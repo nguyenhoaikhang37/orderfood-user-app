@@ -30,7 +30,7 @@ const DetailStore = () => {
 
   const [menuList, setMenuList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -68,13 +68,12 @@ const DetailStore = () => {
         total: totalCart + ship,
       };
       console.log('checout', totalCost);
-      setIsError(false);
+      setIsError('');
       setLoading(true);
       const { data } = await orderApi.checkout(checkoutCart);
       if (!data.success) {
-        setIsError(true);
+        setIsError(data.message);
         setLoading(false);
-
         return;
       }
 
@@ -83,17 +82,18 @@ const DetailStore = () => {
         setLoading(false);
         Swal.fire('Success!', 'Bạn đã thanh toán thành công.', 'success');
         history.push('/');
-        setIsError(false);
+        setIsError('');
+        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
       }
 
       // Thanh toán qua ví
       if (data.success && pay === '61614a35855f83b83e611b82') {
         setLoading(false);
         history.push('/');
-        setIsError(false);
+        setIsError('');
         window.open(data.uri, '_self');
+        dispatch(detailActions.deleteFoodCartByRes(idParams.id));
       }
-      dispatch(detailActions.deleteFoodCartByRes(idParams.id));
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
@@ -118,6 +118,7 @@ const DetailStore = () => {
             loading={loading}
             storeById={storeById}
             isError={isError}
+            setIsError={setIsError}
           />
         </div>
       </div>

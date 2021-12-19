@@ -17,11 +17,15 @@ const Checkout = memo(function Checkout({
   onCheckout,
   storeById,
   isError,
+  setIsError,
 }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setIsError(false);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   const handleAddToCart = (food) => {
