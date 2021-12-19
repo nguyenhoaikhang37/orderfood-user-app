@@ -52,7 +52,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
         ?.reduce((total, cur) => total + cur.totalFood, 0),
       totalCost: foodCart
         ?.filter((food) => food.restaurant === idParams.id)
-        ?.reduce((total, cur) => total + cur.total, 0),
+        ?.reduce((total, cur) => total + cur.totalCost, 0),
       pay: payment,
       ship: getShipMoney(shipMoney),
     });

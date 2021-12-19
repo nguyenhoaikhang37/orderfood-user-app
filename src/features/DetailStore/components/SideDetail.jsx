@@ -10,7 +10,7 @@ const SideDetail = memo(function SideDetail({ menuList }) {
     const timeoutRefresh = () => {
       setRefresh(true);
     };
-    setTimeout(timeoutRefresh, 15000);
+    setTimeout(timeoutRefresh, 7000);
 
     return () => setTimeout(timeoutRefresh);
   }, []);

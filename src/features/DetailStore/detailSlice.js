@@ -31,6 +31,9 @@ const detailSlice = createSlice({
           totalFood:
             (action.payload.lastPrice + priceInListChoose) *
             (state.foodCart[foundIndex]?.quantityInCart + 1),
+          totalCost:
+            (action.payload.price + priceInListChoose) *
+            (state.foodCart[foundIndex]?.quantityInCart + 1),
         };
         localStorage.setItem('food_cart', JSON.stringify(newFoodCart));
         return { ...state, foodCart: newFoodCart };
@@ -39,6 +42,7 @@ const detailSlice = createSlice({
           ...action.payload,
           quantityInCart: 1,
           totalFood: action.payload.lastPrice + priceInListChoose,
+          totalCost: action.payload.price + priceInListChoose,
         });
         localStorage.setItem('food_cart', JSON.stringify(newFoodCart));
         return { ...state, foodCart: newFoodCart };
@@ -56,6 +60,9 @@ const detailSlice = createSlice({
           quantityInCart: state.foodCart[foundIndex]?.quantityInCart - 1,
           totalFood:
             (action.payload.lastPrice + priceInListChoose) *
+            (state.foodCart[foundIndex]?.quantityInCart - 1),
+          totalCost:
+            (action.payload.price + priceInListChoose) *
             (state.foodCart[foundIndex]?.quantityInCart - 1),
         };
 
