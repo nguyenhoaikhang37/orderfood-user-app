@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import AddressInput from 'components/FormFields/AddressInput';
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress } from '@mui/material';
 
 const schema = yup.object().shape({
   phoneNumber: yup
@@ -30,7 +30,7 @@ const schema = yup.object().shape({
   // street: yup.string().required('Tên đường không được để trống!'),
 });
 
-const SignUpForm = ({ classes, onSubmit, loading }) => {
+const SignUpForm = ({ classes, onSubmit, loading, error }) => {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -128,6 +128,11 @@ const SignUpForm = ({ classes, onSubmit, loading }) => {
             </Link>
           </Grid>
         </Grid>
+        {error && (
+          <Alert severity="error">
+            Số điện thoại đã được đăng kí, vui lòng chọn số điện thoại khác
+          </Alert>
+        )}
       </form>
     </Fragment>
   );

@@ -10,6 +10,7 @@ import PopupOTP from './PopupOTP';
 const SignUp = ({ classes }) => {
   const [loading, setLoading] = useState(false);
   const [tokenOtp, setTokenOtp] = useState('');
+  const [error, setError] = useState(false);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -30,8 +31,10 @@ const SignUp = ({ classes }) => {
       setLoading(true);
       const res = await userApi.dangKy(formatFormValues);
       setTokenOtp(res.data.token);
+      setError(false);
       handleOpen();
     } catch (error) {
+      setError(true);
       console.log('Failed to sign up form submit', error);
     }
     setLoading(false);
@@ -45,7 +48,7 @@ const SignUp = ({ classes }) => {
       <Typography component="h1" variant="h5">
         Đăng ký
       </Typography>
-      <SignUpForm onSubmit={handleSubmitForm} classes={classes} loading={loading} />
+      <SignUpForm error={error} onSubmit={handleSubmitForm} classes={classes} loading={loading} />
       <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
         <PopupOTP handleClose={handleClose} tokenOtp={tokenOtp} />
       </Popup>

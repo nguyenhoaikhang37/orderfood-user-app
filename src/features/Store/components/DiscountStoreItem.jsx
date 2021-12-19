@@ -6,12 +6,11 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 const DiscountStoreItem = ({ store }) => {
-  console.log('🚀 ~ file: DiscountStoreItem.jsx ~ line 2 ~ DiscountStoreItem ~ store', store);
   return (
-    <Card sx={{ minWidth: 280 }}>
+    <Card sx={{ minWidth: 200 }}>
       <Link to={`/detail/${store.restaurant._id}`}>
         <CardActionArea>
-          <CardMedia component="img" sx={{ height: '150px !important' }} image={store.photo} />
+          <CardMedia component="img" sx={{ height: '100px !important' }} image={store.photo} />
           <CardContent>
             <Typography gutterBottom variant="body1" sx={{ fontWeight: 'bold' }} component="div">
               {store.nameDiscount}
