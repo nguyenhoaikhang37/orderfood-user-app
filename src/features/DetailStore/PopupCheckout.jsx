@@ -23,7 +23,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
       );
       setShipMoney(res.data.km);
     })();
-  }, []);
+  }, [user?.profile?.lng]);
 
   useEffect(() => {
     (async () => {

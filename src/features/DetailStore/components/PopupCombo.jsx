@@ -25,7 +25,7 @@ const PopupCombo = ({ combo, setOpen }) => {
             <p>Giá: </p>
             <div className="flex flex-col">
               <p className="food-price-prev">
-                {combo?.total.toLocaleString()}{' '}
+                {combo?.price.toLocaleString()}{' '}
                 <span
                   style={{
                     fontWeight: '400',
