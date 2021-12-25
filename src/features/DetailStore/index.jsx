@@ -53,7 +53,7 @@ const DetailStore = () => {
             quantityFood: cart.quantityInCart,
             amount: cart.totalFood,
             listChoose: cart.listChoose,
-            cost: cart.totalCost,
+            price: cart.totalCost,
           })),
         arrayCombo: foodCart
           .filter((food) => food.comboDetails)
@@ -61,7 +61,7 @@ const DetailStore = () => {
             idCombo: cart._id,
             quantityCombo: cart.quantityInCart,
             amount: cart.totalFood,
-            cost: cart.totalCost,
+            price: cart.totalCost,
           })),
         restaurant: storeById._id,
         pay,
