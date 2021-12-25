@@ -69,7 +69,6 @@ const DetailStore = () => {
         totalCost: totalCost + ship,
         total: totalCart + ship,
       };
-      console.log('checout', totalCost);
       setIsError('');
       setLoading(true);
       const { data } = await orderApi.checkout(checkoutCart);

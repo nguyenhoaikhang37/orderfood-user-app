@@ -49,9 +49,17 @@ const ComboItem = ({ combo }) => {
               </span>
             </p>
           </div>
-          <button onClick={() => handleOpen()} className="food-price-add">
-            <i className="fas fa-plus-square food-price-icon"></i>
-          </button>
+
+          {combo?.quantity !== 0 ? (
+            <button onClick={() => handleOpen()} className="food-price-add">
+              <i className="fas fa-plus-square food-price-icon"></i>
+            </button>
+          ) : (
+            <img
+              src="https://khogiaydantuonggiare.com/uploads/images/catalogue/hethang.png"
+              className="sold-out-img"
+            />
+          )}
         </div>
       </div>
       <Popup open={open} setOpen={setOpen} handleClose={handleClose}>
