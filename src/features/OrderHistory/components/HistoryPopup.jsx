@@ -45,17 +45,17 @@ const HistoryPopup = ({ history }) => {
                     </div>
                   </div>
                 </td>
-                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                   {food?.quantityFood}
                 </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {food?.idFood?.price.toLocaleString()} đ
+                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-green-600">
+                  {food?.cost?.toLocaleString()} đ
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  0 đ
+                  {(food?.cost - food?.amount)?.toLocaleString()} đ
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-red-500 font-bold">
-                  {food?.amount.toLocaleString()} đ
+                  {food?.amount?.toLocaleString()} đ
                 </td>
               </tr>
             ))}
