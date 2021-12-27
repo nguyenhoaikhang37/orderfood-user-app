@@ -72,7 +72,7 @@ const HistoryPopup = ({ history }) => {
                     </div>
                   </div>
                 </td>
-                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                   {combo?.quantityCombo}
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-green-600">
