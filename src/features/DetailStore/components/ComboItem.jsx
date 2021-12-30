@@ -21,7 +21,7 @@ const ComboItem = ({ combo }) => {
         <div className="food-price-info">
           <div className="flex flex-col">
             <p className="food-price-prev">
-              {combo?.price.toLocaleString()}{' '}
+              {combo?.price?.toLocaleString()}{' '}
               <span
                 style={{
                   fontWeight: '400',
@@ -35,7 +35,7 @@ const ComboItem = ({ combo }) => {
               </span>
             </p>
             <p className="food-price">
-              {combo?.lastPrice.toLocaleString()}{' '}
+              {combo?.lastPrice?.toLocaleString()}{' '}
               <span
                 style={{
                   fontWeight: '400',

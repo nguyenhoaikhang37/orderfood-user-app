@@ -26,7 +26,7 @@ const MenuFood = memo(function MenuFood({ menu }) {
 
   return (
     <div>
-      {comboList?.length !== 0 && (
+      {comboList?.filter((x) => x)?.length !== 0 && (
         <div id={menu._id} className="food-menu-text">
           {menu.name}
         </div>
@@ -38,9 +38,11 @@ const MenuFood = memo(function MenuFood({ menu }) {
       )}
 
       <div className="food-list">
-        {comboList?.map((combo) => (
-          <ComboItem key={combo._id} combo={combo} />
-        ))}
+        {comboList
+          ?.filter((x) => x)
+          ?.map((combo) => (
+            <ComboItem key={combo?._id} combo={combo} />
+          ))}
         {foodList?.map((food) => (
           <FoodItem key={food._id} food={food} />
         ))}
