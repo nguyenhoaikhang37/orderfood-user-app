@@ -95,6 +95,7 @@ const DetailStore = () => {
         window.open(data.uri, '_self');
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
       }
+      localStorage.removeItem('food_cart');
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
