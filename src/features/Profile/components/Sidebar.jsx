@@ -33,7 +33,8 @@ const Sidebar = ({ user }) => {
               <span>
                 Điểm:{' '}
                 <strong>
-                  {user?.myCoin} ({(user?.myCoin * 1000).toLocaleString()}đ)
+                  {+user?.myCoin?.toFixed(0)} ({(user?.myCoin?.toFixed(0) * 1000).toLocaleString()}
+                  đ)
                 </strong>
               </span>
             </a>

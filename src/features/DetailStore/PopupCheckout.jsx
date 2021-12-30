@@ -153,7 +153,8 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               <div className="checkout-ship-info">
                 <p className="checkout-name checkout-title">Số coin hiện có: </p>
                 <p className="checkout-price">
-                  {user?.myCoin} điểm ({(user?.myCoin * 1000).toLocaleString()} đ)
+                  {+user?.myCoin?.toFixed(0)} điểm (
+                  {(user?.myCoin?.toFixed(0) * 1000).toLocaleString()} đ)
                 </p>
               </div>
             )}
