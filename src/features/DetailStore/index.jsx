@@ -37,7 +37,7 @@ const DetailStore = () => {
       const res = await menuApi.getMenuListByResId(idParams.id);
       setMenuList(res.data.menu);
     })();
-  }, []);
+  }, [idParams]);
 
   useEffect(() => {
     dispatch(fetchFoodByRes(idParams.id));
