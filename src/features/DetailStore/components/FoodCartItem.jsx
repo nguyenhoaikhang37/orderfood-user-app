@@ -9,9 +9,12 @@ const FoodCartItem = memo(function FoodCartItem({ food, handleAddToCart, handleR
         <div className="checkout-name-list">
           <p className="checkout-name">{food?.name}</p>
           <p className="checkout-list-choose-cart">{food?.description}</p>
-          <p className="checkout-list-choose">
-            {food.listChoose?.map((choose) => choose.name).join(', ')}
-          </p>
+          {food?.listChoose?.length > 0 && (
+            <p className="checkout-list-choose">
+              <span className="font-bold">Món kèm:</span>{' '}
+              {food.listChoose?.map((choose) => choose.name).join(', ')}
+            </p>
+          )}
         </div>
       </div>
       <div className="checkout-quantity">
