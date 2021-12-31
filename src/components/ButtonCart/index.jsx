@@ -9,8 +9,8 @@ const ButtonCart = () => {
   return (
     <div className="fixed bottom-0 right-0">
       <div className="header__navbar-item header__navbar-item--has-notify">
-        <div className=" w-16 h-16 mr-12 mb-8 cursor-pointer animate-wiggle">
-          <img src="https://cdn-icons-png.flaticon.com/512/1040/1040254.png" />
+        <div className=" w-20 h-20 mr-14 mb-10 cursor-pointer animate-wiggle">
+          <img src="https://cdn-icons-png.flaticon.com/512/859/859270.png" />
         </div>
         <div className="header__notify" style={{ zIndex: '101 !important' }}>
           <header className="header__notify-header">
