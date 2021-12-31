@@ -7,7 +7,7 @@ import { CardActionArea } from '@mui/material';
 
 const DiscountStoreItem = ({ store }) => {
   return (
-    <Card sx={{ minWidth: 200 }}>
+    <Card sx={{ maxWidth: 200 }}>
       <Link to={`/detail/${store.restaurant._id}`}>
         <CardActionArea>
           <CardMedia component="img" sx={{ height: '100px !important' }} image={store.photo} />

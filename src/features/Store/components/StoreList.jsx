@@ -60,7 +60,7 @@ const StoreList = memo(function StoreList({
             Danh sách cửa hàng khuyến mãi
           </div>
           <div className="home-product">
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap" style={{gap: 20}}>
               {/* Store Item */}
               {discountStoreList.map((store) => (
                 <DiscountStoreItem key={store._id} store={store} />
