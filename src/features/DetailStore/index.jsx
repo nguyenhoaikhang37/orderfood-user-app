@@ -16,6 +16,7 @@ import {
 import orderApi from 'apis/orderApi';
 import menuApi from 'apis/menuApi';
 import Swal from 'sweetalert2';
+import { getUserToken } from 'features/Auth/authSlice';
 
 const DetailStore = () => {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const DetailStore = () => {
         dispatch(detailActions.deleteFoodCartByRes(idParams.id));
       }
       localStorage.removeItem('food_cart');
+      dispatch(getUserToken());
     } catch (error) {
       console.log('🚀 ~ file: index.jsx ~ line 31 ~ handleCheckout ~ error', error);
     }
