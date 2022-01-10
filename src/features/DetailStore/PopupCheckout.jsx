@@ -79,7 +79,7 @@ const PopupCheckout = ({ onCheckout, foodCart, idParams, storeById, loading, isE
               <i className="fas fa-circle text-red-500 mr-1"></i>
               {storeById?.name} - {storeById?.phoneNumber}{' '}
             </p>
-            <p>{storeById?.location}a</p>
+            <p>{storeById?.location}</p>
           </div>
           {!user?.profile && (
             <div className="my-4">
